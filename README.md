@@ -18,5 +18,15 @@ jdk 1.7
 
 运行: mvn clean tomcat7:run
 
-[http://localhost:88/test/index.jsp]
+如果 mvn clean tomcat7:run 不能运行，  C:\Users\Administrator\.m2\settings.xml 添加如下内容。
+..............
 
+ <pluginGroups>      
+ 	  <pluginGroup>com.jayway.maven.plugins.android.generation2</pluginGroup>
+  </pluginGroups>
+..........
+
+</settings>
+
+
+[http://localhost:88/test/index.jsp]
