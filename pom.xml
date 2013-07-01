@@ -125,11 +125,16 @@
 			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
-
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.9.12</version>
+        </dependency>
 	</dependencies>
 
 	<build>
 		<finalName>test</finalName>
+        <outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
@@ -151,7 +156,7 @@
 	</build>
 	<properties>
 		<packaging>war</packaging>
-		<scope>compile</scope>
+		 
 		<slf4j.version>1.6.1</slf4j.version>
 		<maven.test.skip>true</maven.test.skip>
 		<aspectj.version>1.6.12</aspectj.version>
