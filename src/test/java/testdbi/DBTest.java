@@ -26,6 +26,7 @@ public class DBTest {
 	@Test
 	public void testInit() {
 		Assert.notNull(tEntityRepository);
+	 
 		 
 	}
 

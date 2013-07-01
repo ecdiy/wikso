@@ -16,11 +16,11 @@ public class TestInit extends AbstractTestExecutionListener {
 			System.out.println("--test begin--");
 			entityRepository = testContext.getApplicationContext().getBean(
 					TFactorRepository.class);
-			gold = getTEntity("金", 1);
-			water = getTEntity("水", 2);
-			earth = getTEntity("土", 3);
-			fire = getTEntity("火", 4);
-			wood = getTEntity("木", 5);
+			gold = getTEntity("金", 1, 400, 70);
+			water = getTEntity("水", 2, 230, 220);
+			earth = getTEntity("土", 3, 560, 220);
+			fire = getTEntity("火", 4, 260, 340);
+			wood = getTEntity("木", 5, 520, 340);
 
 			factorRelationRepository = testContext.getApplicationContext()
 					.getBean(FactorRelationRepository.class);
@@ -33,14 +33,16 @@ public class TestInit extends AbstractTestExecutionListener {
 	public static Factor gold, fire, water, wood, earth;
 	static TFactorRepository entityRepository;
 
-	private static Factor getTEntity(String name, long id) {
+	private static Factor getTEntity(String name, long id, int x, int y) {
 		Factor e = entityRepository.findOne(id);
 		if (e == null) {
 			e = new Factor();
 			e.setFid(id);
 			e.setName(name);
-			entityRepository.save(e);
 		}
+		e.setX(x);
+		e.setY(y);
+		entityRepository.save(e);
 		return e;
 	}
 
@@ -51,16 +53,14 @@ public class TestInit extends AbstractTestExecutionListener {
 		add(gold, wood, "泄");
 		add(gold, fire, "泄");
 		add(gold, earth, "泄");
-		
- 
+
 		add(water, wood, "生");
 		add(water, fire, "泄");
 		add(water, earth, "生");
-		
- 
+
 		add(wood, fire, "泄");
-		add(wood, earth, "生"); 
- 
+		add(wood, earth, "生");
+
 		add(fire, earth, "泄");
 	}
 
