@@ -76,8 +76,8 @@ body {
 			var sel = document.createElement("script");
 			sel.type = "text/javascript";
 // 			sel.src = srcs[i] + ".js?" + new Date;
-sel.src =  "http://"+document.location.host+"/test/s/fsa.js"  ;
-			document.getElementById("source").href = srcs[i] + ".js";
+sel.src =   "http://"+document.location.host+"/test/data.jsp"  ;
+			document.getElementById("source").href = sel.src;
 			document.getElementsByTagName("head").item(0).appendChild(sel);
 		}
 	}

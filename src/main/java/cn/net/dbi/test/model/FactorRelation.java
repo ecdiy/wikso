@@ -9,6 +9,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 public class FactorRelation extends AbstractPersistable<Long> {
 	long fid1;
 	long fid2;
+	String label;
 
 	public long getFid1() {
 		return fid1;
@@ -24,5 +25,13 @@ public class FactorRelation extends AbstractPersistable<Long> {
 
 	public void setFid2(long fid2) {
 		this.fid2 = fid2;
+	}
+
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
 	}
 }
