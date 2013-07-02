@@ -99,15 +99,6 @@
 					<li><a href="designTable.jspa?tbl=FactorAttr">因子属性表</a></li>
 				</ul>
 
-
-				<h6 id="h-menu-links" class="selected">
-					<a href="#tables"><span>DEMO</span></a>
-				</h6>
-				<ul id="menu-links" class="opened">
-					<li><a href="shw.jsp" target="_blank">JS DEMO</a></li>
-					<li><a href="shw-db.jsp" target="_blank">DB DEMO</a></li>
-				</ul>
-
 			</div>
 		</div>
 		<div id="right">

@@ -17,6 +17,7 @@ public class FactorAttr extends AbstractPersistable<Long> {
 		data, describe, effect, transition;
 	}
 
+	long schemeId;
 	String name;
 	String label;
 	@Enumerated(EnumType.ORDINAL)
@@ -64,6 +65,14 @@ public class FactorAttr extends AbstractPersistable<Long> {
 
 	public void setVal(String val) {
 		this.val = val;
+	}
+
+	public long getSchemeId() {
+		return schemeId;
+	}
+
+	public void setSchemeId(long schemeId) {
+		this.schemeId = schemeId;
 	}
 
 }

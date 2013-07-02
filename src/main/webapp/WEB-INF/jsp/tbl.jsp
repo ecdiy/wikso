@@ -3,7 +3,9 @@
 		<thead>
 			<tr>
 				<c:forEach var="b" items="${cols }">
-					<th>${b.name}</th>
+					<c:if test="${b.name != 'id' && b.name != 'schemeId'}">
+						<th>${b.name}</th>
+					</c:if>
 				</c:forEach>
 			</tr>
 		</thead>
@@ -11,7 +13,9 @@
 			<c:forEach var="f" items="${lists}">
 				<tr>
 					<c:forEach var="b" items="${cols }">
-						<td class="left">${f.get(b.name)}</td>
+						<c:if test="${b.name != 'id' && b.name != 'schemeId'}">
+							<td class="left">${f.get(b.name)}</td>
+						</c:if>
 					</c:forEach>
 				</tr>
 			</c:forEach>
@@ -25,7 +29,7 @@
 			<div class="form">
 				<div class="fields">
 					<c:forEach var="b" items="${cols }">
-						<c:if test="${b.name != 'id' }">
+						<c:if test="${b.name != 'id' && b.name != 'schemeId'}">
 							<div class="field field-first">
 								<div class="label">
 									<label for="input">${b.name}:</label>
