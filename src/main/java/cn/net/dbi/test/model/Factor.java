@@ -1,7 +1,8 @@
 package cn.net.dbi.test.model;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
+
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
  * 因子
@@ -10,9 +11,9 @@ import javax.persistence.Id;
  * 
  */
 @Entity
-public class Factor {
-	@Id
-	long fid;
+public class Factor extends AbstractPersistable<Long> {
+//	@Id
+//	long fid;
 	long schemeId;
 	String name;
 	int x;
@@ -34,13 +35,13 @@ public class Factor {
 		this.name = name;
 	}
 
-	public long getFid() {
-		return fid;
-	}
-
-	public void setFid(long fid) {
-		this.fid = fid;
-	}
+//	public long getFid() {
+//		return fid;
+//	}
+//
+//	public void setFid(long fid) {
+//		this.fid = fid;
+//	}
 
 	public int getX() {
 		return x;

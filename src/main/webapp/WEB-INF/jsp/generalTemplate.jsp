@@ -41,7 +41,6 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		style_path = "s/smooth/resources/css/colors";
-
 		$("#box-tabs, #box-left-tabs").tabs();
 	});
 </script>

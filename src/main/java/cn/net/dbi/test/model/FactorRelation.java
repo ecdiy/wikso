@@ -10,6 +10,7 @@ public class FactorRelation extends AbstractPersistable<Long> {
 	long fid1;
 	long fid2;
 	String label;
+	long schemeId;
 
 	public long getFid1() {
 		return fid1;
@@ -33,5 +34,13 @@ public class FactorRelation extends AbstractPersistable<Long> {
 
 	public void setLabel(String label) {
 		this.label = label;
+	}
+
+	public long getSchemeId() {
+		return schemeId;
+	}
+
+	public void setSchemeId(long schemeId) {
+		this.schemeId = schemeId;
 	}
 }

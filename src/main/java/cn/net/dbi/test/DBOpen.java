@@ -31,6 +31,16 @@ public class DBOpen {
 		}
 	}
 
+	public void exec(String sql, List<?> p) throws SQLException {
+		try (Connection conn = dataSource.getConnection()) {
+			PreparedStatement ps = conn.prepareStatement(sql);
+			for (int i = 0; i < p.size(); i++) {
+				ps.setObject(i + 1, p.get(i));
+			}
+			ps.execute();
+		}
+	}
+
 	public <E> List<E> getList(Class<E> cls, String sql, Object... param)
 			throws SQLException {
 		try (Connection conn = dataSource.getConnection()) {

@@ -4,7 +4,6 @@ import org.springframework.test.context.TestContext;
 import org.springframework.test.context.support.AbstractTestExecutionListener;
 
 import cn.net.dbi.test.model.Factor;
-import cn.net.dbi.test.model.FactorRelation;
 import cn.net.dbi.test.repository.FactorRelationRepository;
 import cn.net.dbi.test.repository.TFactorRepository;
 
@@ -37,7 +36,7 @@ public class TestInit extends AbstractTestExecutionListener {
 		Factor e = entityRepository.findOne(id);
 		if (e == null) {
 			e = new Factor();
-			e.setFid(id);
+//			e.setFid(id);
 			e.setName(name);
 		}
 		e.setX(x);
@@ -65,15 +64,15 @@ public class TestInit extends AbstractTestExecutionListener {
 	}
 
 	private static void add(Factor fid1, Factor fid2, String label) {
-		FactorRelation fr = factorRelationRepository.findByFid1AndFid2AndLabel(
-				fid1.getFid(), fid2.getFid(), label);
-		if (fr == null) {
-			fr = new FactorRelation();
-			fr.setFid1(fid1.getFid());
-			fr.setFid2(fid2.getFid());
-			fr.setLabel(label);
-			factorRelationRepository.save(fr);
-		}
+//		FactorRelation fr = factorRelationRepository.findByFid1AndFid2AndLabel(
+//				fid1.getFid(), fid2.getFid(), label);
+//		if (fr == null) {
+//			fr = new FactorRelation();
+//			fr.setFid1(fid1.getFid());
+//			fr.setFid2(fid2.getFid());
+//			fr.setLabel(label);
+//			factorRelationRepository.save(fr);
+//		}
 	}
 
 }

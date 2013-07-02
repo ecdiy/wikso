@@ -75,9 +75,10 @@ body {
 		for ( var i = 0, l = srcs.length; i < l; i++) {
 			var sel = document.createElement("script");
 			sel.type = "text/javascript";
-// 			sel.src = srcs[i] + ".js?" + new Date;
-sel.src =   "http://"+document.location.host+"/test/data.jsp"  ;
-			document.getElementById("source").href = sel.src;
+			// 			sel.src = srcs[i] + ".js?" + new Date;
+			sel.src = "http://" + document.location.host
+					+ "/test/data.jsp?id=${param.id}";
+			document.getElementById("source").href = "#";
 			document.getElementsByTagName("head").item(0).appendChild(sel);
 		}
 	}
@@ -94,9 +95,35 @@ sel.src =   "http://"+document.location.host+"/test/data.jsp"  ;
 	}
 </script>
 </head>
-<body  onload="init()"> 
+<body onload="init()">
 	<div id="world"></div>
-	  
-	<a id="source" href="">(source)</a>
+
+
+	<a id="source" href="#" onclick="save()">(save)</a>
+
+	<script>
+		function save() {
+			var pos = "";
+			for ( var i = 0; i < all.length; i++) {
+				var x = (all[i].properties.dx + all[i].properties.position.x);
+				var y = (all[i].properties.dy + all[i].properties.position.y);
+				if (x < 0)
+					x = x * (-1);
+				if (y < 0)
+					y = y * (-1);
+				pos += x + "," + y + ";";
+			}
+			console.log("--" + pos);
+			document.getElementById('points').value = pos;
+			document.getElementById('uppointsForm').submit();
+		}
+	</script>
+	<form action="updatePoints.jspa" id="uppointsForm" method="post"
+		target="upformframe">
+		<input type="hidden" name="id" value="${param.id}"> <input
+			type="hidden" name="points" id="points" />
+	</form>
+	<iframe name="upformframe" width="0" height="0"
+		style="overflow: hidden"></iframe>
 </body>
 </html>

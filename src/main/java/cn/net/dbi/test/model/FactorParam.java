@@ -11,6 +11,7 @@ public class FactorParam extends AbstractPersistable<Long> {
 	String val;
 	String label;
 	String table;
+	long schemeId;
 
 	public int getNum() {
 		return num;
@@ -42,5 +43,13 @@ public class FactorParam extends AbstractPersistable<Long> {
 
 	public void setTable(String table) {
 		this.table = table;
+	}
+
+	public long getSchemeId() {
+		return schemeId;
+	}
+
+	public void setSchemeId(long schemeId) {
+		this.schemeId = schemeId;
 	}
 }

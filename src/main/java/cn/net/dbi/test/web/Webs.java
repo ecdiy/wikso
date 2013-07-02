@@ -6,6 +6,16 @@ import cn.net.dbi.CommonFilter;
 
 @Component
 public class Webs {
+	public long getLong(String val) {
+		if (val == null)
+			return 0;
+		val = val.trim();
+		if (isNum(val)) {
+			return Long.parseLong(val);
+		}
+		return 0;
+	}
+
 	public long getLong(String name, long defaultLong) {
 		String val = CommonFilter.getRequest().getParameter(name);
 		if (val == null)
