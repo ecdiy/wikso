@@ -13,13 +13,21 @@ import javax.persistence.Id;
 public class Factor {
 	@Id
 	long fid;
-
+	long schemeId;
 	String name;
 	int x;
 	int y;
 
 	public String getName() {
 		return name;
+	}
+
+	public long getSchemeId() {
+		return schemeId;
+	}
+
+	public void setSchemeId(long schemeId) {
+		this.schemeId = schemeId;
 	}
 
 	public void setName(String name) {

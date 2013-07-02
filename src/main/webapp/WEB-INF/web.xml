@@ -14,7 +14,29 @@
 		<listener-class>cn.net.dbi.SpringContextLoader</listener-class>
 	</listener>
 
+	<filter>
+		<filter-name>sitemesh</filter-name>
+		<filter-class>com.opensymphony.sitemesh.webapp.SiteMeshFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>sitemesh</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+	</filter-mapping>
 
+	<filter>
+		<filter-name>CommonRequest</filter-name>
+		<filter-class>cn.net.dbi.CommonFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>CommonRequest</filter-name>
+		<servlet-name>spring</servlet-name>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+	</filter-mapping>
 
 	<servlet>
 		<servlet-name>spring</servlet-name>
@@ -24,6 +46,7 @@
 	<servlet-mapping>
 		<servlet-name>spring</servlet-name>
 		<url-pattern>/</url-pattern>
+		<url-pattern>*.jspa</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>

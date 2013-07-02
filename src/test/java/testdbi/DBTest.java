@@ -1,5 +1,8 @@
 package testdbi;
 
+import java.sql.SQLException;
+import java.util.HashMap;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,8 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springframework.util.Assert;
 
+import antlr.collections.List;
+import cn.net.dbi.test.DBOpen;
 import cn.net.dbi.test.repository.TFactorRepository;
 
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
@@ -22,12 +27,28 @@ import cn.net.dbi.test.repository.TFactorRepository;
 public class DBTest {
 	@Autowired
 	TFactorRepository tEntityRepository;
+	@Autowired
+	DBOpen db;
 
 	@Test
 	public void testInit() {
 		Assert.notNull(tEntityRepository);
-	 
-		 
+
 	}
 
+	@Test
+	public void testDBOpen() throws SQLException {
+		// db.exec("ALTER TABLE `dbitest`.`TableName1`     ADD COLUMN `b2` VARCHAR(50) NULL ");
+	}
+
+	@Test
+	public void testDBOpenQ() throws SQLException {
+		db.getColumns();
+	}
+
+	@Test
+	public void testDBOpenQ2() throws SQLException {
+//		List<HashMap> list = db.getList(HashMap.class, "",
+//				"select * from Factor where schemeId=?", 1);
+	}
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<decorators defaultdir="/WEB-INF/jsp">
+	<excludes>
+		<pattern>/login.jsp*</pattern>
+		<pattern>*Action*</pattern>
+		<pattern>*data*</pattern> 
+		<pattern>*shw*</pattern> 
+	</excludes>
+
+	<decorator name="htm" page="generalTemplate.jsp">
+		<pattern>*.jsp</pattern>
+	</decorator>
+
+</decorators>

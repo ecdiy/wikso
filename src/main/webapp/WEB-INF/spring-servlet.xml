@@ -12,7 +12,7 @@
 	<mvc:annotation-driven />
 
 	<!-- The controllers are autodetected POJOs labeled with the @Controller annotation. -->
-	<context:component-scan base-package="cn.net.dbi.test.repository">
+	<context:component-scan base-package="cn.net.dbi.test.web">
 		<context:include-filter expression="org.springframework.stereotype.Controller" type="annotation" />
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" />
 	</context:component-scan>
