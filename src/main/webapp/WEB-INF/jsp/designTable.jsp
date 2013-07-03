@@ -3,16 +3,7 @@
 	<!-- box / title -->
 	<div class="title">
 		<h5>表[${param.tbl }]</h5>
-		<div class="search">
-			<form action="#" method="post">
-				<div class="input">
-					<input type="text" id="search" name="search" />
-				</div>
-				<div class="button">
-					<input type="submit" name="submit" value="Search" />
-				</div>
-			</form>
-		</div>
+		 
 	</div>
 	<!-- end box / title -->
 	<div class="table">
@@ -23,16 +14,19 @@
 						<th class="left">字段名</th>
 						<th>类型</th>
 						<th>长度</th>
-
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach var="c" items="${cols}">
-
 						<tr>
 							<td class="title">${c.name}</td>
 							<td class="price">${c.type}</td>
 							<td class="date">${c.size}</td>
+							<td><c:if
+									test="${c.name!='id' && c.name!='schemeId'  && c.name!='x' && c.name!='label' && c.name!='y' && c.name!='fid1' && c.name!='fid2' }">
+									<a href="#" onclick="del('${param.tbl}','${c.name}')">删除</a>
+								</c:if></td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -42,7 +36,15 @@
 	</div>
 </div>
 
-
+<script type="text/javascript">
+	function del(tbl, id) {
+		dwra.sqlExec("ALTER TABLE `" + tbl + "` DROP COLUMN `" + id + "`", {
+			callback : function() {
+				window.location.reload(true);
+			}
+		});
+	}
+</script>
 <!-- end table -->
 <div id="box-left-tabs" class="box box-left box-padding">
 	<!-- box / title -->

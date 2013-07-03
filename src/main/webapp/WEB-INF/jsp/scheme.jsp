@@ -22,4 +22,7 @@
 	</div>
 	<div id="box-FactorAttr"><jsp:include
 			page="/tbl.jspa?tbl=FactorAttr&id=${param.id }" /></div>
+
+
 </div>
+

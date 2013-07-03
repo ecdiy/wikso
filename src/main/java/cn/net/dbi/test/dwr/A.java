@@ -8,6 +8,8 @@ import org.directwebremoting.annotations.RemoteProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import cn.net.dbi.test.model.Factor;
+import cn.net.dbi.test.repository.FactorAttrRepository;
+import cn.net.dbi.test.repository.FactorRelationRepository;
 import cn.net.dbi.test.repository.SchemeRepository;
 import cn.net.dbi.test.repository.TFactorRepository;
 import cn.net.dbi.test.service.DBOpen;
@@ -15,9 +17,13 @@ import cn.net.dbi.test.service.DBOpen;
 @RemoteProxy(name = "dwra")
 public class A {
 	@Autowired
+	FactorRelationRepository factorRelationRepository;
+	@Autowired
 	TFactorRepository factorRepository;
 	@Autowired
 	SchemeRepository schemeRepository;
+	@Autowired
+	FactorAttrRepository factorAttrRepository;
 	@Autowired
 	DBOpen db;
 
@@ -37,5 +43,13 @@ public class A {
 	@RemoteMethod
 	public void sqlExec(String sql) throws SQLException {
 		db.exec(sql);
+	}
+
+	@RemoteMethod
+	public void delFactor(long schemeId) {
+		factorAttrRepository.removeBySschemeId(schemeId);
+		factorRelationRepository.removeBySschemeId(schemeId);
+		factorRepository.removeBySschemeId(schemeId);
+		schemeRepository.removeBySschemeId(schemeId);
 	}
 }
