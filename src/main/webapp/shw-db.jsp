@@ -19,6 +19,13 @@
 <script src="s/src/joint.dia.erd.js" type="text/javascript"></script>
 <script src="s/src/joint.dia.org.js" type="text/javascript"></script>
 
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/dwr/engine.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/dwr/util.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/dwr/interface/dwra.js"></script>
+
 <title>Runner.</title>
 <style type="text/css">
 body {
@@ -97,11 +104,9 @@ body {
 </head>
 <body onload="init()">
 	<div id="world"></div>
-
-
 	<a id="source" href="#" onclick="save()">(save)</a>
-
 	<script>
+		var schemeId = "${param.id}";
 		function save() {
 			var pos = "";
 			for ( var i = 0; i < all.length; i++) {
@@ -113,17 +118,9 @@ body {
 					y = y * (-1);
 				pos += x + "," + y + ";";
 			}
-			console.log("--" + pos);
-			document.getElementById('points').value = pos;
-			document.getElementById('uppointsForm').submit();
+
+			dwra.savePoints(schemeId, pos);
 		}
 	</script>
-	<form action="updatePoints.jspa" id="uppointsForm" method="post"
-		target="upformframe">
-		<input type="hidden" name="id" value="${param.id}"> <input
-			type="hidden" name="points" id="points" />
-	</form>
-	<iframe name="upformframe" width="0" height="0"
-		style="overflow: hidden"></iframe>
 </body>
 </html>

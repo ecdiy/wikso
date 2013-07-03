@@ -12,13 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.net.dbi.test.DBOpen;
-import cn.net.dbi.test.model.Factor;
 import cn.net.dbi.test.model.Scheme;
 import cn.net.dbi.test.repository.SchemeRepository;
 import cn.net.dbi.test.repository.TFactorRepository;
@@ -98,21 +95,4 @@ public class XController {
 		return "scheme";
 	}
 
-	@ResponseBody
-	@RequestMapping("updatePoints.jspa")
-	public void updatePoints(@RequestParam("id") long schemeId,
-			@RequestParam("points") String points) {
-		List<Factor> list = factorRepository.findBySchemeId(schemeId);
-		String pos[] = points.split(";");
-		for (int i = 0; i < list.size(); i++) {
-			String xy = pos[i];
-			String p[] = xy.split(",");
-			list.get(i).setX(Integer.parseInt(p[0]));
-			list.get(i).setY(Integer.parseInt(p[1]));
-			factorRepository.save(list.get(i));
-		}
-
-	}
-
-	// modifyTable.jspa
 }

@@ -5,12 +5,30 @@
 	<artifactId>test</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-
+	<repositories>
+		<repository> 
+			<id>oss-sonatype-snapshots</id>
+			<name>OSS Sonatype Snapshots Repository</name>
+			<url>http://oss.sonatype.org/content/repositories/snapshots</url>
+		</repository>
+	</repositories>
 	<dependencies>
 		<dependency>
 			<groupId>opensymphony</groupId>
 			<artifactId>sitemesh</artifactId>
 			<version>2.4.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.directwebremoting</groupId>
+			<artifactId>dwr</artifactId>
+			<version>3.0.0-rc3-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.directwebremoting</groupId>
+			<artifactId>dwr</artifactId>
+			<classifier>noncla</classifier>
+			<version>3.0.0-rc3-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
@@ -132,6 +150,12 @@
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>1.9.12</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>javax.servlet.jsp-api</artifactId>
+			<version>2.3.1</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 

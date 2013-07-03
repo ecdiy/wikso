@@ -38,6 +38,10 @@
 	type="text/javascript"></script>
 <script src="s/smooth/resources/scripts/smooth.autocomplete.js"
 	type="text/javascript"></script>
+
+<script type="text/javascript" src="dwr/engine.js"></script>
+<script type="text/javascript" src="dwr/util.js"></script>
+
 <script type="text/javascript">
 	$(document).ready(function() {
 		style_path = "s/smooth/resources/css/colors";
