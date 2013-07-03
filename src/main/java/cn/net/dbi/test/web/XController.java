@@ -15,10 +15,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import cn.net.dbi.test.DBOpen;
+import cn.net.dbi.test.model.Col;
 import cn.net.dbi.test.model.Scheme;
 import cn.net.dbi.test.repository.SchemeRepository;
 import cn.net.dbi.test.repository.TFactorRepository;
+import cn.net.dbi.test.service.DBOpen;
 
 @Controller
 public class XController {
@@ -35,16 +36,16 @@ public class XController {
 	public String addTblData(@RequestParam("schemeId") long schemeId,
 			@RequestParam("tbl") String tbl, HttpServletRequest req)
 			throws SQLException {
-		List<HashMap<String, String>> cols = db.getTblColumns(tbl);
+		List<Col> cols = db.getTblColumns(tbl);
 		StringBuffer sb1 = new StringBuffer("insert into ");
 		sb1.append(tbl).append("(");
 		StringBuffer sb2 = new StringBuffer();
 		LinkedList<String> list = new LinkedList<>();
-		for (HashMap<String, String> col : cols) {
-			String n = col.get("name");
-			String v = req.getParameter(n);
+		for (Col col : cols) {
+
+			String v = req.getParameter(col.getName());
 			if (v != null && !v.isEmpty()) {
-				sb1.append(n).append(",");
+				sb1.append(col.getName()).append(",");
 				sb2.append("?,");
 				list.add(v);
 			}

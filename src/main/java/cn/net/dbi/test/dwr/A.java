@@ -7,10 +7,10 @@ import org.directwebremoting.annotations.RemoteMethod;
 import org.directwebremoting.annotations.RemoteProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import cn.net.dbi.test.DBOpen;
 import cn.net.dbi.test.model.Factor;
 import cn.net.dbi.test.repository.SchemeRepository;
 import cn.net.dbi.test.repository.TFactorRepository;
+import cn.net.dbi.test.service.DBOpen;
 
 @RemoteProxy(name = "dwra")
 public class A {

@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import cn.net.dbi.test.DBOpen;
+import cn.net.dbi.test.service.DBOpen;
 
 @Controller
 public class ModifyTable {

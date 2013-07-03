@@ -7,20 +7,32 @@
 						<th>${b.name}</th>
 					</c:if>
 				</c:forEach>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach var="f" items="${lists}">
-				<tr>
+				<tr id="${param.tbl}_${f.get('id')}">
 					<c:forEach var="b" items="${cols }">
 						<c:if test="${b.name != 'id' && b.name != 'schemeId'}">
 							<td class="left">${f.get(b.name)}</td>
 						</c:if>
 					</c:forEach>
+					<td><a href="#" onclick="del('${param.tbl}',${f.get('id')})">删除</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
+	<script type="text/javascript">
+	function del(tbl,id){
+		dwra.sqlExec("delete from "+tbl+" where id="+id,{
+		  	callback: function(){
+		  	window.location.reload(true);
+		  	}
+		  }) ;
+	}
+	
+	</script>
 	<br> <br>
 	<div id="box-left-forms">
 		<form action="addTblData.jspa" method="post">
@@ -29,15 +41,8 @@
 			<div class="form">
 				<div class="fields">
 					<c:forEach var="b" items="${cols }">
-						<c:if test="${b.name != 'id' && b.name != 'schemeId'}">
-							<div class="field field-first">
-								<div class="label">
-									<label for="input">${b.name}:</label>
-								</div>
-								<div class="input">
-									<input type="text" id="${b.name}" name="${b.name}" />
-								</div>
-							</div>
+						<c:if test="${b.name != 'id' && b.name != 'schemeId'}">				 
+				 ${convert.getDefHtml( b, webs.getLong(param.id) )  }							
 						</c:if>
 					</c:forEach>
 					<div class="buttons">

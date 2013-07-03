@@ -5,10 +5,11 @@ Joint.paper("world", 800, 600);
 
 var all = [];
  
-<c:set var="sid" value="${webs.getLong(param.id)}"></c:set>
+<c:set var="sid" value="${webs.getLong(param.id)}"/>
+<c:set var="sid" value="${webs.getLong(param.id)}"/>
 
  
-<c:forEach var="f" items="${TFactorRepository.findBySchemeId(sid) }">
+<c:forEach var="f" items="${convert.convertList(  TFactorRepository.findBySchemeId(sid) ) }">
 var s${f.id} = fsa.State.create({
   position: {x: ${f.x}, y: ${f.y}},
   label: "${f.name}"

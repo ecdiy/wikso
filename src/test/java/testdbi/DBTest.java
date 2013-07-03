@@ -16,8 +16,8 @@ import org.springframework.test.context.support.DirtiesContextTestExecutionListe
 import org.springframework.util.Assert;
 
 import antlr.collections.List;
-import cn.net.dbi.test.DBOpen;
 import cn.net.dbi.test.repository.TFactorRepository;
+import cn.net.dbi.test.service.DBOpen;
 
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 @RunWith(SpringJUnit4ClassRunner.class)

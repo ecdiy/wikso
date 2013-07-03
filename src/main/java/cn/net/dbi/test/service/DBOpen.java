@@ -1,4 +1,4 @@
-package cn.net.dbi.test;
+package cn.net.dbi.test.service;
 
 import java.lang.reflect.Field;
 import java.sql.Connection;
@@ -14,6 +14,8 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import cn.net.dbi.test.model.Col;
 
 @Component
 public class DBOpen {
@@ -132,20 +134,20 @@ public class DBOpen {
 		}
 	}
 
-	public List<HashMap<String, String>> getTblColumns(String tbl)
-			throws SQLException {
-		List<HashMap<String, String>> list = new LinkedList<>();
+	public List<Col> getTblColumns(String tbl) throws SQLException {
+		List<Col> list = new LinkedList<>();
 		try (Connection conn = dataSource.getConnection()) {
 			ResultSet rsc = conn.getMetaData().getColumns("", "", tbl, "");
 			int cc = rsc.getMetaData().getColumnCount();
 			while (rsc.next()) {
-				HashMap<String, String> map = new HashMap<>();
+				Col col = new Col();
 				for (int i = 1; i <= cc; i++) {
-					map.put("name", rsc.getString("COLUMN_NAME"));
-					map.put("type", rsc.getString("TYPE_NAME"));
-					map.put("size", rsc.getString("COLUMN_SIZE"));
+					col.setTbl(tbl);
+					col.setName(rsc.getString("COLUMN_NAME"));
+					col.setType(rsc.getString("TYPE_NAME"));
+					col.setSize(rsc.getInt("COLUMN_SIZE"));
 				}
-				list.add(map);
+				list.add(col);
 			}
 		}
 		return list;

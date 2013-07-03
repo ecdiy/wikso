@@ -10,10 +10,10 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  * @author Administrator
  * 
  */
+@SuppressWarnings("serial")
 @Entity
 public class Factor extends AbstractPersistable<Long> {
-//	@Id
-//	long fid;
+
 	long schemeId;
 	String name;
 	int x;
@@ -34,14 +34,6 @@ public class Factor extends AbstractPersistable<Long> {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-//	public long getFid() {
-//		return fid;
-//	}
-//
-//	public void setFid(long fid) {
-//		this.fid = fid;
-//	}
 
 	public int getX() {
 		return x;

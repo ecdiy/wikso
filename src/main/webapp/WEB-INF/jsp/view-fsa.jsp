@@ -65,10 +65,8 @@
 			for ( var i = 0, l = srcs.length; i < l; i++) {
 				var sel = document.createElement("script");
 				sel.type = "text/javascript";
-				// 			sel.src = srcs[i] + ".js?" + new Date;
 				sel.src = "http://" + document.location.host
 						+ "/test/data.jsp?id=${param.id}";
-				document.getElementById("source").href = "#";
 				document.getElementsByTagName("head").item(0).appendChild(sel);
 			}
 		}
@@ -83,7 +81,7 @@
 			world.style.width = w + 'px';
 			world.style.height = h + 'px';
 		}
-		$(function(){
+		$(function() {
 			init();
 		});
 	</script>
@@ -102,7 +100,6 @@
 					y = y * (-1);
 				pos += x + "," + y + ";";
 			}
-
 			dwra.savePoints(schemeId, pos);
 		}
 	</script>
