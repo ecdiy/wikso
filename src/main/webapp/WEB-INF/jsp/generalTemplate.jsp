@@ -11,10 +11,13 @@
 	href="s/smooth/resources/css/style.css" media="screen" />
 <link id="color" rel="stylesheet" type="text/css"
 	href="s/smooth/resources/css/colors/blue.css" />
-<!-- scripts (jquery) -->
+
+
+<!--[if IE]><script language="javascript" type="text/javascript" src="s/smooth/resources/scripts/excanvas.min.js"></script><![endif]-->
+
 <script src="s/smooth/resources/scripts/jquery-1.4.2.min.js"
 	type="text/javascript"></script>
-<!--[if IE]><script language="javascript" type="text/javascript" src="s/smooth/resources/scripts/excanvas.min.js"></script><![endif]-->
+
 <script src="s/smooth/resources/scripts/jquery-ui-1.8.custom.min.js"
 	type="text/javascript"></script>
 <script src="s/smooth/resources/scripts/jquery.ui.selectmenu.js"
@@ -25,7 +28,9 @@
 	type="text/javascript"></script>
 <script src="s/smooth/resources/scripts/tiny_mce/jquery.tinymce.js"
 	type="text/javascript"></script>
-<!-- scripts (custom) -->
+
+
+
 <script src="s/smooth/resources/scripts/smooth.js"
 	type="text/javascript"></script>
 <script src="s/smooth/resources/scripts/smooth.menu.js"
@@ -36,11 +41,15 @@
 	type="text/javascript"></script>
 <script src="s/smooth/resources/scripts/smooth.dialog.js"
 	type="text/javascript"></script>
-<script src="s/smooth/resources/scripts/smooth.autocomplete.js"
-	type="text/javascript"></script>
 
-<script type="text/javascript" src="dwr/engine.js"></script>
-<script type="text/javascript" src="dwr/util.js"></script>
+
+
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/dwr/engine.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/dwr/util.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/dwr/interface/dwra.js"></script>
 
 <script type="text/javascript">
 	$(document).ready(function() {

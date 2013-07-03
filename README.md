@@ -30,3 +30,5 @@ jdk 1.7
 
 
 [http://localhost:88/test/index.jsp]
+
+N个点平均分配的计算公式: 坐标 X=r*(1+cos(A) ; Y= r*(1+sin(A)) ;A=360*m/N ;(m=0,n-1);

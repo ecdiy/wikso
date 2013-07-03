@@ -1,5 +1,6 @@
 package cn.net.dbi.test.dwr;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.directwebremoting.annotations.RemoteMethod;
@@ -31,5 +32,10 @@ public class A {
 			list.get(i).setY(Integer.parseInt(p[1]));
 			factorRepository.save(list.get(i));
 		}
+	}
+
+	@RemoteMethod
+	public void sqlExec(String sql) throws SQLException {
+		db.exec(sql);
 	}
 }

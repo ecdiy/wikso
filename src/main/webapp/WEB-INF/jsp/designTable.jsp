@@ -2,7 +2,7 @@
 <div class="box">
 	<!-- box / title -->
 	<div class="title">
-		<h5>Products</h5>
+		<h5>表[${param.tbl }]</h5>
 		<div class="search">
 			<form action="#" method="post">
 				<div class="input">
@@ -20,26 +20,24 @@
 			<table>
 				<thead>
 					<tr>
-						<th class="left">Title</th>
-						<th>Price</th>
-						<th>Added</th>
-						<th class="selected last"><input type="checkbox"
-							class="checkall" /></th>
+						<th class="left">字段名</th>
+						<th>类型</th>
+						<th>长度</th>
+
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach var="c" items="${cols}">
 
 						<tr>
-							<td class="title">${c. name}</td>
+							<td class="title">${c.name}</td>
 							<td class="price">${c.type}</td>
 							<td class="date">${c.size}</td>
-							<td class="selected last"><input type="checkbox" /></td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
-			
+
 		</form>
 	</div>
 </div>
@@ -59,18 +57,23 @@
 				<div class="fields">
 					<div class="field field-first">
 						<div class="label">
-							<label for="input">名称:</label>
+							<label for="input">字段名:</label>
 						</div>
 						<div class="input">
 							<input type="text" id="name" name="name" />
 						</div>
 					</div>
-					<div class="field ">
+					<style>
+#dateTypeDiv,#dateTypeDiv a,#dateTypeDiv span {
+	float: left;
+}
+</style>
+					<div class="field " id="dateTypeDiv">
 						<div class="label">
 							<label for="input">类型:</label>
 						</div>
-						<div class="input">
-							<select name="sqltype" id="sqltype">
+						<div class="input" style="float: left">
+							<select name="sqltype" id="sqltype" onchange="changeSqlType()">
 								<script>
 									var sqltypes = [ [ 'VARCHAR', 1, 64 ],
 											[ 'text', 0, 0 ] ];
@@ -80,14 +83,33 @@
 														+ sqltypes[i][0]
 														+ '</option>');
 									}
+									function changeSqlType() {
+										var v = $("#sqltype").val();
+										for ( var i = 0; i < sqltypes.length; i++) {
+											if (sqltypes[i][0] == v) {
+												if (sqltypes[i][1] == 1) {
+													$("#lengthDIV").css(
+															"display", "");
+												} else {
+													$("#lengthDIV").css(
+															"display", "none");
+												}
+											}
+										}
+										console.log(v);
+									}
 								</script>
 
-								<option value="VARCHAR">VARCHAR</option>
-								<option value="text">text</option>
 							</select>
+							<div id="lengthDIV" style="float: left">
+								<span style="line-height: 30px; padding: 0 15px;">长度: </span><input
+									type="text" id="len" name="len"
+									style="border: 1px solid #000000; height: 30px; position: relative; width: 60px;" />
+							</div>
+
 						</div>
 					</div>
-					<div class="buttons">
+					<div class="buttons" style="clear: both">
 						<input type="submit" id="submit" value="添加"
 							onclick="return postSQL()" />
 					</div>
@@ -102,9 +124,16 @@
 <script>
 	function postSQL() {
 		var n = $("#name").val();
-		$("#sql").val(
-				"ALTER TABLE  ${param.tbl} ADD COLUMN `" + n + "` "
-						+ $("#sqltype").val() + "(50) NULL");
+		var sql = "ALTER TABLE  ${param.tbl} ADD COLUMN `" + n + "` "
+				+ $("#sqltype").val();
+		for ( var i = 0; i < sqltypes.length; i++) {
+			if (sqltypes[i][0] == n) {
+				if (sqltypes[i][1] == 1) {
+					sql += "(" + $("#len").val() + ")";
+				}
+			}
+		}
+		$("#sql").val(sql + " NULL");
 		return true;
 	}
 </script>
