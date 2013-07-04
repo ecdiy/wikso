@@ -3,8 +3,7 @@
 #box-tabs {
 	text-align: center;
 	background: #DFDFDF;
-	margin: 0 30px 100px 30px;
-	font: 14px/18px 'Lucida Grande', 'Segoe UI', sans-serif;
+	margin: 0 30px 100px 30px; 
 }
 
 #box-tabs h1 {
@@ -74,6 +73,10 @@ canvas {
 				return encoded.join('');
 			}
 		}
+	
+	function saveToDB(){
+		dwrdiy.save("${param.id}", localStorage['fsm']) ;
+	}
 	// -->
 	</script>
 
@@ -84,6 +87,7 @@ canvas {
 	
 	<div>
 		<p class="center">
+		<a href="javascript:saveToDB()">保存</a> |
 			Export as: <a href="javascript:saveAsPNG()">PNG</a> | <a
 				href="javascript:saveAsSVG()">SVG</a> | <a
 				href="javascript:saveAsLaTeX()">LaTeX</a>

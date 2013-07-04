@@ -206,7 +206,7 @@
 		<packaging>war</packaging>
 
 		<slf4j.version>1.6.1</slf4j.version>
-		<!-- <maven.test.skip>true</maven.test.skip> -->
+		<maven.test.skip>true</maven.test.skip>
 		<aspectj.version>1.6.12</aspectj.version>
 
 		<db.driver>com.mysql.jdbc.Driver</db.driver>

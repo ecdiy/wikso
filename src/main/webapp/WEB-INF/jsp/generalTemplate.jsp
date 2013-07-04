@@ -50,6 +50,8 @@
 	src="${pageContext.request.contextPath}/dwr/util.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/dwr/interface/dwra.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/dwr/interface/dwrdiy.js"></script>
 
 <script type="text/javascript">
 	$(document).ready(function() {

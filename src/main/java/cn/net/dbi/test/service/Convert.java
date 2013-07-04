@@ -48,15 +48,17 @@ public class Convert {
 				&& col.getName().equals("label")) {
 			List<FactorAttr> list = factorAttrRepository
 					.findBySchemeId(schemeId);
-			StringBuffer sb = new StringBuffer("<select  id=\"" + col.getName()
-					+ "\" name=\"" + col.getName() + "\">");
-			if (list != null)
+			StringBuffer sb = new StringBuffer();
+			if (list != null && list.size() > 1) {
+				sb.append("<select  id=\"" + col.getName() + "\" name=\""
+						+ col.getName() + "\">");
 				for (FactorAttr f : list) {
 					sb.append("<option value='").append(f.getLabel())
 							.append("'>").append(f.getLabel())
 							.append("</option>");
 				}
-			sb.append("</select>");
+				sb.append("</select>");
+			}
 			return df(col, sb.toString());
 		}
 		if (col.getName().equals("x") || col.getName().equals("y")) {
@@ -64,14 +66,16 @@ public class Convert {
 					+ "\" value=\"0\">";
 		} else if (col.getName().equals("fid1") || col.getName().equals("fid2")) {
 			List<Factor> list = factorRepository.findBySchemeId(schemeId);
-			StringBuffer sb = new StringBuffer("<select  id=\"" + col.getName()
-					+ "\" name=\"" + col.getName() + "\">");
-			if (list != null)
+			StringBuffer sb = new StringBuffer();
+			if (list != null && list.size() > 1) {
+				sb.append("<select  id=\"" + col.getName() + "\" name=\""
+						+ col.getName() + "\">");
 				for (Factor f : list) {
 					sb.append("<option value='").append(f.getId()).append("'>")
 							.append(f.getName()).append("</option>");
 				}
-			sb.append("</select>");
+				sb.append("</select>");
+			}
 			return df(col, sb.toString());
 		} else {
 			return df(col, "<input type=\"text\" id=\"" + col.getName()
