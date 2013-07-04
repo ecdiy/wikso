@@ -47,7 +47,7 @@
 }
 
 #funMenu,#funMenu li {
-	width: 80px;
+	width: 120px;
 	float: left
 }
 </style>

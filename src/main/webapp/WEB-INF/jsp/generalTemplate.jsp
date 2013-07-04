@@ -103,15 +103,7 @@
 					<li>------------------------</li>
 					<li><a href="craeteScheme.jsp">创建方案</a></li>
 				</ul>
-				
-				<h6 id="h-menu-links" class="selected">
-					<a href="#links"><span>DIY所有方案</span></a>
-				</h6>
-				<ul id="menu-links" class="opened">
-					<c:forEach var="r" items="${schemeRepository.findAll() }">
-						<li><a href="schemeDiy.jspa?id=${r.id}">${r.name}</a></li>
-					</c:forEach> 
-				</ul>
+			 
 
 
 				<h6 id="h-menu-links" class="selected">

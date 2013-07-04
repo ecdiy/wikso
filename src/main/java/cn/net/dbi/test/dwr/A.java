@@ -13,6 +13,7 @@ import cn.net.dbi.test.repository.FactorRelationRepository;
 import cn.net.dbi.test.repository.SchemeRepository;
 import cn.net.dbi.test.repository.TFactorRepository;
 import cn.net.dbi.test.service.DBOpen;
+import cn.net.dbi.test.service.DBService;
 
 @RemoteProxy(name = "dwra")
 public class A {
@@ -26,6 +27,8 @@ public class A {
 	FactorAttrRepository factorAttrRepository;
 	@Autowired
 	DBOpen db;
+	@Autowired
+	DBService ds;
 
 	@RemoteMethod
 	public void savePoints(long schemeId, String points) {
@@ -46,10 +49,7 @@ public class A {
 	}
 
 	@RemoteMethod
-	public void delFactor(long schemeId) {
-		factorAttrRepository.removeBySchemeId(schemeId);
-		factorRelationRepository.removeBySschemeId(schemeId);
-		factorRepository.removeBySchemeId(schemeId);
-		schemeRepository.removeBySschemeId(schemeId);
+	public void deleteScheme(long schemeId) {
+		ds.deleteScheme(schemeId);
 	}
 }

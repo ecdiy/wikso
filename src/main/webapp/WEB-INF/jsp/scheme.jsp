@@ -5,6 +5,7 @@
 		<h5>${scheme.name}</h5>
 		<ul class="links">
 			<li><a href="#box-ViewFsa">关系图</a></li>
+			<li><a href="#box-DIY">DIY</a></li>
 			<li><a href="#box-Factor">因子属性</a></li>
 			<li><a href="#box-FactorRelation">因子参数</a></li>
 			<li><a href="#box-FactorAttr">因子关系</a></li>
@@ -14,7 +15,9 @@
 	<div id="box-ViewFsa">
 		<jsp:include page="view-fsa.jsp?id=${param.id }" />
 	</div>
-
+	<div id="box-DIY">
+		<jsp:include page="/schemeDiy.jspa?id=${param.id }" />
+	</div>
 	<div id="box-Factor">
 		<jsp:include page="/tbl.jspa?tbl=Factor&id=${param.id }" />
 	</div>

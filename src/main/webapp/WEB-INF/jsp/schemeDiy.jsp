@@ -1,12 +1,12 @@
 <style type="text/css">
 <!--
-#box-tabs {
+#schemeDIYDIV {
 	text-align: center;
 	background: #DFDFDF;
 	margin: 0 30px 100px 30px; 
 }
 
-#box-tabs h1 {
+#schemeDIYDIV h1 {
 	font: bold italic 50px Georgia, serif;
 }
 
@@ -19,13 +19,13 @@ canvas {
 	margin: 10px auto;
 }
 
-#box-tabs div {
+#schemeDIYDIV div {
 	margin: 30px auto;
 	text-align: left;
 	max-width: 800px;
 }
 
-#box-tabs .error {
+#schemeDIYDIV .error {
 	display: block;
 	color: red;
 	font-size: 28px;
@@ -33,11 +33,11 @@ canvas {
 	padding: 30px;
 }
 
-#box-tabs .center {
+#schemeDIYDIV .center {
 	text-align: center;
 }
 
-#box-tabs textarea {
+#schemeDIYDIV textarea {
 	display: none;
 	width: 75%;
 	height: 400px;
@@ -47,7 +47,7 @@ canvas {
 </style>
 
 
-<div id="box-tabs" class="box" style="background: #DFDFDF;">
+<div id="schemeDIYDIV" class="box" style="background: #DFDFDF;">
 	<script type="text/javascript" src="s/fsm.js"></script>
 	<script type="text/javascript">
 	<!--
@@ -75,7 +75,7 @@ canvas {
 		}
 	
 	function saveToDB(){
-		alert(localStorage['fsm']);
+		//alert(localStorage['fsm']);
 		dwrdiy.save("${param.id}", localStorage['fsm']) ;
 	}
 	// -->

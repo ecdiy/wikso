@@ -21,11 +21,11 @@ public class DBService {
 	FactorAttrRepository factorAttrRepository;
 
 	public void deleteScheme(long schemeId) {
-		delFactor(schemeId);
+		deleteFactor(schemeId);
 		schemeRepository.delete(schemeId);
 	}
 
-	public void delFactor(long schemeId) {
+	public void deleteFactor(long schemeId) {
 		factorAttrRepository.removeBySchemeId(schemeId);
 		factorRelationRepository.removeBySschemeId(schemeId);
 		factorRepository.removeBySchemeId(schemeId); 
