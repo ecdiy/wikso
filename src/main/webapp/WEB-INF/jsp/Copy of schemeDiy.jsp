@@ -1,13 +1,16 @@
+<!doctype html>
+<html>
+<head> 
 <style type="text/css">
 <!--
-#box-tabs {
+body {
 	text-align: center;
 	background: #DFDFDF;
 	margin: 0 30px 100px 30px;
 	font: 14px/18px 'Lucida Grande', 'Segoe UI', sans-serif;
 }
 
-#box-tabs h1 {
+h1 {
 	font: bold italic 50px Georgia, serif;
 }
 
@@ -20,13 +23,17 @@ canvas {
 	margin: 10px auto;
 }
 
-#box-tabs div {
+a {
+	color: black;
+}
+
+div {
 	margin: 30px auto;
 	text-align: left;
 	max-width: 800px;
 }
 
-#box-tabs .error {
+.error {
 	display: block;
 	color: red;
 	font-size: 28px;
@@ -34,11 +41,16 @@ canvas {
 	padding: 30px;
 }
 
-#box-tabs .center {
+p {
+	margin: 30px 0;
+	line-height: 20px;
+}
+
+.center {
 	text-align: center;
 }
 
-#box-tabs textarea {
+textarea {
 	display: none;
 	width: 75%;
 	height: 400px;
@@ -46,42 +58,40 @@ canvas {
 }
 -->
 </style>
+<script type="text/javascript" src="s/fsm.js"></script>
+<script type="text/javascript">
+<!--
+	 
 
-
-<div id="box-tabs" class="box" style="background: #DFDFDF;">
-	<script type="text/javascript" src="s/fsm.js"></script>
-	<script type="text/javascript">
-	<!--
-		if (typeof btoa == 'undefined') {
-			function btoa(str) {
-				var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
-				var encoded = [];
-				var c = 0;
-				while (c < str.length) {
-					var b0 = str.charCodeAt(c++);
-					var b1 = str.charCodeAt(c++);
-					var b2 = str.charCodeAt(c++);
-					var buf = (b0 << 16) + ((b1 || 0) << 8) + (b2 || 0);
-					var i0 = (buf & (63 << 18)) >> 18;
-					var i1 = (buf & (63 << 12)) >> 12;
-					var i2 = isNaN(b1) ? 64 : (buf & (63 << 6)) >> 6;
-					var i3 = isNaN(b2) ? 64 : (buf & 63);
-					encoded[encoded.length] = chars.charAt(i0);
-					encoded[encoded.length] = chars.charAt(i1);
-					encoded[encoded.length] = chars.charAt(i2);
-					encoded[encoded.length] = chars.charAt(i3);
-				}
-				return encoded.join('');
+	if (typeof btoa == 'undefined') {
+		function btoa(str) {
+			var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+			var encoded = [];
+			var c = 0;
+			while (c < str.length) {
+				var b0 = str.charCodeAt(c++);
+				var b1 = str.charCodeAt(c++);
+				var b2 = str.charCodeAt(c++);
+				var buf = (b0 << 16) + ((b1 || 0) << 8) + (b2 || 0);
+				var i0 = (buf & (63 << 18)) >> 18;
+				var i1 = (buf & (63 << 12)) >> 12;
+				var i2 = isNaN(b1) ? 64 : (buf & (63 << 6)) >> 6;
+				var i3 = isNaN(b2) ? 64 : (buf & 63);
+				encoded[encoded.length] = chars.charAt(i0);
+				encoded[encoded.length] = chars.charAt(i1);
+				encoded[encoded.length] = chars.charAt(i2);
+				encoded[encoded.length] = chars.charAt(i3);
 			}
+			return encoded.join('');
 		}
-	// -->
-	</script>
-
+	}
+// -->
+</script>
+</head>
+<body> 
 	<canvas id="canvas" width="800" height="600">
 		<span class="error">Your browser does not support<br>the HTML5 &lt;canvas&gt; element</span>
 	</canvas>
-	
-	
 	<div>
 		<p class="center">
 			Export as: <a href="javascript:saveAsPNG()">PNG</a> | <a
@@ -89,7 +99,8 @@ canvas {
 				href="javascript:saveAsLaTeX()">LaTeX</a>
 		</p>
 		<textarea id="output"></textarea>
-		 
+		<p>The big white box above is the FSM designer.&nbsp; Here's how
+			to use it:</p>
 		<ul>
 			<li><b>Add a state:</b> double-click on the canvas</li>
 			<li><b>Add an arrow:</b> shift-drag on the canvas</li>
@@ -103,6 +114,10 @@ canvas {
 				number (like "S_0")</li>
 			<li><b>Type greek letter:</b> put a backslash before it (like
 				"\beta")</li>
-		</ul> 
+		</ul>
+		<p>This was made in HTML5 and JavaScript using the canvas element.</p>
 	</div>
-</div>
+ 
+	 
+</body>
+</html>

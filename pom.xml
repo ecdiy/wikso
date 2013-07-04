@@ -6,7 +6,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<repositories>
-		<repository> 
+		<repository>
 			<id>oss-sonatype-snapshots</id>
 			<name>OSS Sonatype Snapshots Repository</name>
 			<url>http://oss.sonatype.org/content/repositories/snapshots</url>
@@ -157,6 +157,17 @@
 			<version>2.3.1</version>
 			<scope>provided</scope>
 		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.eclipse</groupId> -->
+<!-- 			<artifactId>swt</artifactId> -->
+<!-- 			<version>3.3.0-v3346</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.eclipse.swt.win32.win32</groupId> -->
+<!-- 			<artifactId>x86</artifactId> -->
+<!-- 			<version>3.3.0-v3346</version> -->
+<!-- 			<scope>provided</scope> -->
+<!-- 		</dependency> -->
 	</dependencies>
 
 	<build>
