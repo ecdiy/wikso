@@ -14,9 +14,6 @@
 	<script src="s/src/joint.dia.erd.js" type="text/javascript"></script>
 	<script src="s/src/joint.dia.org.js" type="text/javascript"></script>
 
-
-
-
 	<style type="text/css">
 #world {
 	background-color: white;
@@ -48,6 +45,11 @@
 	left: 20px;
 	font-size: 12px;
 }
+
+#funMenu,#funMenu li {
+	width: 80px;
+	float: left
+}
 </style>
 	<script type="text/javascript">
 		function gup(name) {
@@ -65,17 +67,13 @@
 			for ( var i = 0, l = srcs.length; i < l; i++) {
 				var sel = document.createElement("script");
 				sel.type = "text/javascript";
-				sel.src = "http://" + document.location.host
-						+ "/test/data.jsp?id=${param.id}";
+				sel.src = "http://"
+						+ document.location.host
+						+ "/test/data.jspa?id=${param.id}&role=${param.role}&oid=${param.oid}";
 				document.getElementsByTagName("head").item(0).appendChild(sel);
 			}
 		}
-		function title(s) {
-			document.getElementById('title').innerHTML = s;
-		}
-		function description(s) {
-			document.getElementById('description').innerHTML = s;
-		}
+
 		function dimension(w, h) {
 			var world = document.getElementById('world');
 			world.style.width = w + 'px';
@@ -84,10 +82,7 @@
 		$(function() {
 			init();
 		});
-	</script>
-	<div id="world"></div>
-	<a id="source" href="#" onclick="save()">(save)</a>
-	<script>
+
 		var schemeId = "${param.id}";
 		function save() {
 			var pos = "";
@@ -103,4 +98,20 @@
 			dwra.savePoints(schemeId, pos);
 		}
 	</script>
+	<ul id="funMenu">
+		<li><a href="?id=${param.id}&role=0">所有</a></li>
+		<li><a href="?id=${param.id}&role=1">过滤孤立点</a></li>
+
+		<c:forEach var="frr"
+			items="${factorRelationRepository. findBySchemeId(webs.getLong(param.id))}">
+			<li><a href="?id=${param.id}&role=2&oid=${frr.label}">${frr.label}</a></li>
+		</c:forEach>
+
+
+		<li><a id="source" href="#" onclick="save()">保存</a></li>
+	</ul>
+
+	<div id="world"></div>
+
+
 </div>

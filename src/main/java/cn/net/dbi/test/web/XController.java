@@ -96,4 +96,10 @@ public class XController {
 		return "scheme";
 	}
 
+	@RequestMapping("schemeDiy.jspa")
+	public String schemeDiy(@RequestParam("id") long schemeId, Model model)
+			throws SQLException {
+		return "schemeDiy";
+	}
+
 }

@@ -50,10 +50,12 @@ public class Convert {
 					.findBySchemeId(schemeId);
 			StringBuffer sb = new StringBuffer("<select  id=\"" + col.getName()
 					+ "\" name=\"" + col.getName() + "\">");
-			for (FactorAttr f : list) {
-				sb.append("<option value='").append(f.getLabel()).append("'>")
-						.append(f.getLabel()).append("</option>");
-			}
+			if (list != null)
+				for (FactorAttr f : list) {
+					sb.append("<option value='").append(f.getLabel())
+							.append("'>").append(f.getLabel())
+							.append("</option>");
+				}
 			sb.append("</select>");
 			return df(col, sb.toString());
 		}
@@ -64,10 +66,11 @@ public class Convert {
 			List<Factor> list = factorRepository.findBySchemeId(schemeId);
 			StringBuffer sb = new StringBuffer("<select  id=\"" + col.getName()
 					+ "\" name=\"" + col.getName() + "\">");
-			for (Factor f : list) {
-				sb.append("<option value='").append(f.getId()).append("'>")
-						.append(f.getName()).append("</option>");
-			}
+			if (list != null)
+				for (Factor f : list) {
+					sb.append("<option value='").append(f.getId()).append("'>")
+							.append(f.getName()).append("</option>");
+				}
 			sb.append("</select>");
 			return df(col, sb.toString());
 		} else {

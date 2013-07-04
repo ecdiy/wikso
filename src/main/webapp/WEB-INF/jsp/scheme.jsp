@@ -14,15 +14,16 @@
 	<div id="box-ViewFsa">
 		<jsp:include page="view-fsa.jsp?id=${param.id }" />
 	</div>
+
 	<div id="box-Factor">
 		<jsp:include page="/tbl.jspa?tbl=Factor&id=${param.id }" />
 	</div>
-	<div id="box-FactorRelation">
-		<jsp:include page="/tbl.jspa?tbl=FactorRelation&id=${param.id }" />
-	</div>
+
+
 	<div id="box-FactorAttr"><jsp:include
 			page="/tbl.jspa?tbl=FactorAttr&id=${param.id }" /></div>
 
-
+	<div id="box-FactorRelation"><jsp:include
+			page="/tbl.jspa?tbl=FactorRelation&id=${param.id }" /></div>
 </div>
 

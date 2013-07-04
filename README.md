@@ -4,6 +4,8 @@
 
 第三方库:[http://www.jointjs.com/demos/run.html?unit=fsa]
 
+http://madebyevan.com/fsm/
+
 数据库 :mysql 用户名:root 密码：root2011 数据库名:dbitest  数据库表spring data JPA自动创建
 
 tomcat 7.0+

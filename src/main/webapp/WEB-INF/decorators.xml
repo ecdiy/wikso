@@ -4,12 +4,18 @@
 	<excludes>
 		<pattern>/login.jsp*</pattern>
 		<pattern>*Action*</pattern>
-		<pattern>*data*</pattern> 
-		<pattern>*shw*</pattern> 
+		<pattern>*data*</pattern>
+		<pattern>*shw*</pattern>
+		<pattern>*/img.jsp*</pattern>
+		<pattern>*/schemeDiy.jsp*</pattern>
 	</excludes>
 
 	<decorator name="htm" page="generalTemplate.jsp">
 		<pattern>*.jsp</pattern>
+	</decorator>
+
+	<decorator name="diyHtm" page="generalTemplateDiy.jsp">
+		<pattern>*/schemeDiy.jsp*</pattern>
 	</decorator>
 
 </decorators>

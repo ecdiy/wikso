@@ -1,4 +1,5 @@
 <div class="table">
+	<c:if test="${not empty lists }">
 	<table>
 		<thead>
 			<tr>
@@ -23,6 +24,8 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	</c:if>
+	
 	<script type="text/javascript">
 	function del(tbl,id){
 		dwra.sqlExec("delete from "+tbl+" where id="+id,{
@@ -30,11 +33,10 @@
 		  	window.location.reload(true);
 		  	}
 		  }) ;
-	}
-	
+	}	
 	</script>
 	<br> <br>
-	<div id="box-left-forms">
+	<div>
 		<form action="addTblData.jspa" method="post">
 			<input type="hidden" name="tbl" value="${param.tbl}"> <input
 				type="hidden" name="schemeId" value="${param.id}">

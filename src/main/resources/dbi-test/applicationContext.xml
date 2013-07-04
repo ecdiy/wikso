@@ -13,16 +13,16 @@
 	<context:property-placeholder
 		location="classpath*:META-INF/dbi-test/*.properties" />
 
-<!-- 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" -->
-<!-- 		destroy-method="close" p:driverClassName="com.mysql.jdbc.Driver" -->
-<!-- 		p:url="${db.taobao.url}" p:username="${db.username}" p:password="${db.password}" /> -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close" p:driverClassName="com.mysql.jdbc.Driver"
+		p:url="${db.taobao.url}" p:username="${db.username}" p:password="${db.password}" />
 
 
-	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-	<property name="jndiName">
-	<value>java:comp/env/jdbc/dbitest</value>
-	</property>
-	</bean>
+<!-- 	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean"> -->
+<!-- 	<property name="jndiName"> -->
+<!-- 	<value>java:comp/env/jdbc/dbitest</value> -->
+<!-- 	</property> -->
+<!-- 	</bean> -->
 
 </beans>
  
