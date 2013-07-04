@@ -75,6 +75,7 @@ canvas {
 		}
 	
 	function saveToDB(){
+		alert(localStorage['fsm']);
 		dwrdiy.save("${param.id}", localStorage['fsm']) ;
 	}
 	// -->
@@ -88,7 +89,7 @@ canvas {
 	<div>
 		<p class="center">
 		<a href="javascript:saveToDB()">保存</a> |
-			Export as: <a href="javascript:saveAsPNG()">PNG</a> | <a
+			Export as: <a  href="javascript:saveAsPNG()">PNG</a> | <a
 				href="javascript:saveAsSVG()">SVG</a> | <a
 				href="javascript:saveAsLaTeX()">LaTeX</a>
 		</p>

@@ -97,6 +97,13 @@
 			}
 			dwra.savePoints(schemeId, pos);
 		}
+		function deleteScheme() {
+			dwra.deleteScheme(schemeId, {
+				callback : function() {
+					window.location = "craeteScheme.jsp";
+				}
+			});
+		}
 	</script>
 	<ul id="funMenu">
 		<li><a href="?id=${param.id}&role=0">所有</a></li>
@@ -109,6 +116,7 @@
 
 
 		<li><a id="source" href="#" onclick="save()">保存</a></li>
+		<li><a id="source" href="#" onclick="deleteScheme()">删除方案【${scheme.name}】</a></li>
 	</ul>
 
 	<div id="world"></div>

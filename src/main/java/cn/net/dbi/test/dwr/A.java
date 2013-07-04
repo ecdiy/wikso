@@ -47,9 +47,9 @@ public class A {
 
 	@RemoteMethod
 	public void delFactor(long schemeId) {
-		factorAttrRepository.removeBySschemeId(schemeId);
+		factorAttrRepository.removeBySchemeId(schemeId);
 		factorRelationRepository.removeBySschemeId(schemeId);
-		factorRepository.removeBySschemeId(schemeId);
+		factorRepository.removeBySchemeId(schemeId);
 		schemeRepository.removeBySschemeId(schemeId);
 	}
 }

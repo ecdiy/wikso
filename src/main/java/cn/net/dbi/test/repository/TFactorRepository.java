@@ -2,13 +2,14 @@ package cn.net.dbi.test.repository;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import cn.net.dbi.test.model.Factor;
 
-public interface TFactorRepository extends
-		PagingAndSortingRepository<Factor, Long> {
+public interface TFactorRepository extends JpaRepository<Factor, Long> {
 
 	public List<Factor> findBySchemeId(long schemeId);
 
@@ -17,8 +18,11 @@ public interface TFactorRepository extends
 			long schemeId3);
 
 	@Query(nativeQuery = true, value = "SELECT * FROM Factor WHERE schemeId=? AND id IN (SELECT fid1 FROM FactorRelation WHERE label=? UNION SELECT fid2 FROM FactorRelation WHERE label=? )")
-	public List<Factor> findByRelation(long schemeId, String label, String label2);
+	public List<Factor> findByRelation(long schemeId, String label,
+			String label2);
 
-	@Query(nativeQuery = true, value = "delete from Factor where schemeId=?")
-	public void removeBySschemeId(long schemeId);
+	@Modifying
+	@Transactional
+	@Query(value = "DELETE FROM `Factor`  where  `schemeId`=?", nativeQuery = true)
+	public int removeBySchemeId(long schemeId);
 }

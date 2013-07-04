@@ -14,7 +14,6 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springframework.util.Assert;
 
-import cn.net.dbi.test.dwr.Diy;
 import cn.net.dbi.test.repository.TFactorRepository;
 import cn.net.dbi.test.service.DBOpen;
 
@@ -32,7 +31,6 @@ public class DBTest {
 	@Test
 	public void testInit() {
 		Assert.notNull(tEntityRepository);
-
 	}
 
 	@Test
@@ -51,14 +49,20 @@ public class DBTest {
 		// "select * from Factor where schemeId=?", 1);
 	}
 
-//	@Autowired
-//	Diy diy;
-//
-//	@Test
-//	public void testJson() {
-//		String str = "{\"nodes\":[{\"x\":202,\"y\":241,\"text\":\"fa\",\"isAcceptState\":false},{\"x\":349,\"y\":239,\"text\":\"fa\",\"isAcceptState\":false}],"
-//				+ "\"links\":[{\"type\":\"Link\",\"nodeA\":0,\"nodeB\":1,\"text\":\"fsd\",\"lineAngleAdjust\":0,\"parallelPart\":0.5,\"perpendicularPart\":0}]}";
-//
-//		diy.save(4, str);
-//	}
+	// @Test
+	// public void testJson() {
+	// String str =
+	// "{\"nodes\":[{\"x\":202,\"y\":241,\"text\":\"fa\",\"isAcceptState\":false},{\"x\":349,\"y\":239,\"text\":\"fa\",\"isAcceptState\":false}],"
+	// +
+	// "\"links\":[{\"type\":\"Link\",\"nodeA\":0,\"nodeB\":1,\"text\":\"fsd\",\"lineAngleAdjust\":0,\"parallelPart\":0.5,\"perpendicularPart\":0}]}";
+	//
+	// diy.save(4, str);
+	// }
+	
+	@Autowired
+	TFactorRepository factorRepository;
+	@Test
+	public void testDele(){
+		factorRepository.removeBySchemeId(7);
+	}
 }
