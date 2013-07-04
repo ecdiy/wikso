@@ -17,6 +17,9 @@ public interface FactorRelationRepository extends
 
 	public List<FactorRelation> findBySchemeId(long schemeId);
 
+	@Query(nativeQuery = true, value = "SELECT DISTINCT label FROM FactorRelation WHERE schemeId=?")
+	public List<String> findLableBySchemeId(long schemeId);
+
 	@Modifying
 	@Transactional
 	@Query(nativeQuery = true, value = "delete from FactorRelation where schemeId=?")

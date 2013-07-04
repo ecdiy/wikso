@@ -3,7 +3,7 @@
 #schemeDIYDIV {
 	text-align: center;
 	background: #DFDFDF;
-	margin: 0 30px 100px 30px; 
+	margin: 0 30px 0 10px;
 }
 
 #schemeDIYDIV h1 {
@@ -43,9 +43,49 @@ canvas {
 	height: 400px;
 	margin: 0 auto;
 }
+
+#schemeDIYDIV  #funMenu {
+	padding-left: 30px;
+	float: left;
+	text-align: left;
+	float: left;
+}
+
+#schemeDIYDIV  #funMenu li {
+	width: 200px;
+}
 -->
 </style>
+<script>
+	var fsmDataJSON = {
+		"nodes" : [],
+		"links" : [ ]
+	};
+	var xmapids={};
+	<c:forEach var="f" items="${list}">
+	xmapids.x${f.id}= fsmDataJSON.nodes.length;
+	fsmDataJSON.nodes[fsmDataJSON.nodes.length]={
+				"x" : ${f.x},
+				"y" : ${f.y},
+				"text" : "${f.name}",
+				"isAcceptState" : false,
+				"fid":${f.id}
+			};
 
+	</c:forEach>
+	<c:forEach var="fr" items="${frlist}">
+	fsmDataJSON.links[fsmDataJSON.links.length]= {
+			"type" : "Link",
+			"nodeA" : xmapids.x${fr.fid1},
+			"nodeB" : xmapids.x${fr.fid2},
+			"text" : "${fr.label}",
+			"lineAngleAdjust" : 0,
+			"parallelPart" : 0.5,
+			"perpendicularPart" : 0
+		}
+	</c:forEach>
+</script>
+ 
 
 <div id="schemeDIYDIV" class="box" style="background: #DFDFDF;">
 	<script type="text/javascript" src="s/fsm.js"></script>
@@ -73,41 +113,57 @@ canvas {
 				return encoded.join('');
 			}
 		}
-	
-	function saveToDB(){
-		//alert(localStorage['fsm']);
-		dwrdiy.save("${param.id}", localStorage['fsm']) ;
-	}
+
+		function saveToDB() {
+			//alert(localStorage['fsm']);
+			dwrdiy.save("${param.id}", localStorage['fsm'],{
+			  	callback: function(){
+				  	window.location.reload(true);
+				  	}
+				  });
+		}
 	// -->
 	</script>
+
+
+	<ul id="funMenu">
+		<li><a href="?id=${param.id}&role=0">所有</a></li>
+		<li><a href="?id=${param.id}&role=1">过滤孤立点</a></li>
+
+		<c:forEach var="label"
+			items="${factorRelationRepository.findLableBySchemeId(webs.getLong(param.id))}">
+			<li><a href="?id=${param.id}&role=2&oid=${label}">--
+					${label}</a></li>
+		</c:forEach>
+
+		<li><a id="source" href="#" onclick="deleteScheme()">删除方案【${scheme.name}】</a></li>
+
+
+
+		<li>Export as: <a href="javascript:saveAsPNG()">PNG</a> | <a
+			href="javascript:saveAsSVG()">SVG</a> | <a
+			href="javascript:saveAsLaTeX()">LaTeX</a>
+		</li>
+		<li><b>Add a state:</b> double-click on the canvas</li>
+		<li><b>Add an arrow:</b> shift-drag on the canvas</li>
+		<li><b>Move something:</b> drag it around</li>
+		<li><b>Delete something:</b> click it and press the delete key
+			(not the backspace key)</li>
+
+		<li><b>Make accept state:</b> double-click on an existing state</li>
+		<li><b>Type numeric subscript:</b> put an underscore before the
+			number (like "S_0")</li>
+		<li><b>Type greek letter:</b> put a backslash before it (like
+			"\beta")</li>
+		<li><a href="javascript:saveToDB()">保存</a></li>
+	</ul>
+
+
+
 
 	<canvas id="canvas" width="800" height="600">
 		<span class="error">Your browser does not support<br>the HTML5 &lt;canvas&gt; element</span>
 	</canvas>
-	
-	
-	<div>
-		<p class="center">
-		<a href="javascript:saveToDB()">保存</a> |
-			Export as: <a  href="javascript:saveAsPNG()">PNG</a> | <a
-				href="javascript:saveAsSVG()">SVG</a> | <a
-				href="javascript:saveAsLaTeX()">LaTeX</a>
-		</p>
-		<textarea id="output"></textarea>
-		 
-		<ul>
-			<li><b>Add a state:</b> double-click on the canvas</li>
-			<li><b>Add an arrow:</b> shift-drag on the canvas</li>
-			<li><b>Move something:</b> drag it around</li>
-			<li><b>Delete something:</b> click it and press the delete key
-				(not the backspace key)</li>
-		</ul>
-		<ul>
-			<li><b>Make accept state:</b> double-click on an existing state</li>
-			<li><b>Type numeric subscript:</b> put an underscore before the
-				number (like "S_0")</li>
-			<li><b>Type greek letter:</b> put a backslash before it (like
-				"\beta")</li>
-		</ul> 
-	</div>
+	<textarea id="output"></textarea>
+
 </div>

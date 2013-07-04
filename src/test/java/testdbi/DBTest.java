@@ -1,6 +1,7 @@
 package testdbi;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,6 +15,7 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springframework.util.Assert;
 
+import cn.net.dbi.test.repository.FactorRelationRepository;
 import cn.net.dbi.test.repository.TFactorRepository;
 import cn.net.dbi.test.service.DBOpen;
 
@@ -27,6 +29,16 @@ public class DBTest {
 	TFactorRepository tEntityRepository;
 	@Autowired
 	DBOpen db;
+
+	@Autowired
+	FactorRelationRepository factorRelationRepository;
+
+	@Test
+	public void query() {
+		List<String> list = factorRelationRepository.findLableBySchemeId(7);
+		if (list != null)
+			System.out.println(list.size());
+	}
 
 	@Test
 	public void testInit() {
@@ -58,11 +70,12 @@ public class DBTest {
 	//
 	// diy.save(4, str);
 	// }
-	
+
 	@Autowired
 	TFactorRepository factorRepository;
+
 	@Test
-	public void testDele(){
+	public void testDele() {
 		factorRepository.removeBySchemeId(7);
 	}
 }

@@ -62,26 +62,13 @@
 			else
 				return results[1];
 		}
-		function init() {
-			var srcs = gup("unit").split(',');
-			for ( var i = 0, l = srcs.length; i < l; i++) {
-				var sel = document.createElement("script");
-				sel.type = "text/javascript";
-				sel.src = "http://"
-						+ document.location.host
-						+ "/test/data.jspa?id=${param.id}&role=${param.role}&oid=${param.oid}";
-				document.getElementsByTagName("head").item(0).appendChild(sel);
-			}
-		}
 
 		function dimension(w, h) {
 			var world = document.getElementById('world');
 			world.style.width = w + 'px';
 			world.style.height = h + 'px';
 		}
-		$(function() {
-			init();
-		});
+	 
 
 		var schemeId = "${param.id}";
 		function save() {
@@ -109,9 +96,10 @@
 		<li><a href="?id=${param.id}&role=0">所有</a></li>
 		<li><a href="?id=${param.id}&role=1">过滤孤立点</a></li>
 
-		<c:forEach var="frr"
-			items="${factorRelationRepository. findBySchemeId(webs.getLong(param.id))}">
-			<li><a href="?id=${param.id}&role=2&oid=${frr.label}">${frr.label}</a></li>
+		<c:forEach var="label"
+			items="${factorRelationRepository.findLableBySchemeId(webs.getLong(param.id))}">
+			<li><a href="?id=${param.id}&role=2&oid=${label}">--
+					${label}</a></li>
 		</c:forEach>
 
 
@@ -121,5 +109,29 @@
 
 	<div id="world"></div>
 
+	<script type="text/javascript">
 
+dimension(800, 600);
+
+var fsa = Joint.dia.fsa;
+Joint.paper("world", 800, 600);
+
+var all = [];
+  
+
+ 
+<c:forEach var="f" items="${list}">
+var s${f.id} = fsa.State.create({
+  position: {x: ${f.x}, y: ${f.y}},
+  label: "${f.name}"
+});
+
+all[all.length] =  s${f.id};
+</c:forEach>
+
+<c:forEach var="r" items="${frlist}">
+s${r.fid1}.joint(s${r.fid2}, (fsa.arrow.label = "${r.label}", fsa.arrow)).register(all);
+</c:forEach>
+
+</script>
 </div>

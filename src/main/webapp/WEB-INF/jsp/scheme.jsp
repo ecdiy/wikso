@@ -13,10 +13,10 @@
 	</div>
 	<!-- box / title -->
 	<div id="box-ViewFsa">
-		<jsp:include page="view-fsa.jsp?id=${param.id }" />
+		<jsp:include page="view-fsa.jsp" />
 	</div>
 	<div id="box-DIY">
-		<jsp:include page="/schemeDiy.jspa?id=${param.id }" />
+		<jsp:include page="schemeDiy.jsp" />
 	</div>
 	<div id="box-Factor">
 		<jsp:include page="/tbl.jspa?tbl=Factor&id=${param.id }" />

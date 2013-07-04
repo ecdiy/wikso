@@ -996,7 +996,7 @@ function restoreBackup() {
   }
 
   try {
-    var backup = JSON.parse(localStorage['fsm']);
+    var backup = fsmDataJSON;// JSON.parse(localStorage['fsm']);
 
     for (var i = 0; i < backup.nodes.length; i++) {
       var backupNode = backup.nodes[i];
