@@ -90,14 +90,14 @@ public class SchemeController {
 		return "redirect:scheme.jspa?id=" + scheme.getId();
 	}
 
- 
-
 	@RequestMapping("scheme.jspa")
 	public String designTable(
 			@RequestParam(value = "id", defaultValue = "0") long schemeId,
 			@RequestParam(value = "role", defaultValue = "0") String role,
 			@RequestParam(value = "oid", defaultValue = "0") String oid,
-			Model model) throws SQLException {
+			Model model) throws Exception {
+		if (oid != null)
+			oid = new String(oid.getBytes("ISO8859-1"), "utf-8");
 		Scheme scheme = schemeRepository.findOne(schemeId);
 		if (scheme == null) {
 			return "redirect:craeteScheme.jsp";

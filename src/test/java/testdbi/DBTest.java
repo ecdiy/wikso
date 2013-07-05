@@ -1,5 +1,7 @@
 package testdbi;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -18,6 +20,7 @@ import org.springframework.util.Assert;
 import cn.net.dbi.test.repository.FactorRelationRepository;
 import cn.net.dbi.test.repository.TFactorRepository;
 import cn.net.dbi.test.service.DBOpen;
+import cn.net.dbi.test.service.DBService;
 
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -29,7 +32,8 @@ public class DBTest {
 	TFactorRepository tEntityRepository;
 	@Autowired
 	DBOpen db;
-
+	@Autowired
+	DBService ds;
 	@Autowired
 	FactorRelationRepository factorRelationRepository;
 
@@ -77,5 +81,11 @@ public class DBTest {
 	@Test
 	public void testDele() {
 		factorRepository.removeBySchemeId(7);
+	}
+
+	@Test
+	public void loadDate() throws IOException {
+		File t = new File("src/test/resources/test.csv");
+		ds.loadFromFile(10, t);
 	}
 }

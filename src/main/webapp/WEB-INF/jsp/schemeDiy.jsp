@@ -144,8 +144,8 @@ canvas {
 			href="javascript:saveAsSVG()">SVG</a> | <a
 			href="javascript:saveAsLaTeX()">LaTeX</a>
 		</li>
-		<li><b>Add a state:</b> double-click on the canvas</li>
-		<li><b>Add an arrow:</b> shift-drag on the canvas</li>
+		<li><b>双击添加因子</b></li>
+		<li><b>shift+拖曳  添加因子关系</b></li>
 		<li><b>Move something:</b> drag it around</li>
 		<li><b>Delete something:</b> click it and press the delete key
 			(not the backspace key)</li>

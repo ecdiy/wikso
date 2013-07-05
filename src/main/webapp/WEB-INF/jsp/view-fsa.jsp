@@ -70,7 +70,7 @@
 		}
 	 
 
-		var schemeId = "${param.id}";
+
 		function save() {
 			var pos = "";
 			for ( var i = 0; i < all.length; i++) {
@@ -84,13 +84,7 @@
 			}
 			dwra.savePoints(schemeId, pos);
 		}
-		function deleteScheme() {
-			dwra.deleteScheme(schemeId, {
-				callback : function() {
-					window.location = "craeteScheme.jsp";
-				}
-			});
-		}
+	
 	</script>
 	<ul id="funMenu">
 		<li><a href="?id=${param.id}&role=0">所有</a></li>
