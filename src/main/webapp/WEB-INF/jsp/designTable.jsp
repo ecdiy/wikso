@@ -77,7 +77,7 @@
 						<div class="input" style="float: left">
 							<select name="sqltype" id="sqltype" onchange="changeSqlType()">
 								<script>
-									var sqltypes = [ [ 'VARCHAR', 1, 64 ],
+									var sqltypes = [ [ 'int', 0, 0 ], [ 'VARCHAR', 1, 64 ],
 											[ 'text', 0, 0 ] ];
 									for ( var i = 0; i < sqltypes.length; i++) {
 										document

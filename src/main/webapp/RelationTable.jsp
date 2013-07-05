@@ -32,7 +32,7 @@
 				}
 			}
 			if(!fid)
-			tbs+="<td>-</td>";
+			tbs+="<td insert='1' val=\"-\" fid1=\""+colums[i][0]+"\"  fid2=\""+colums[j][0]+"\">-</td>";
 		}
 		tbs+="</tr>";
 	}
@@ -44,9 +44,6 @@
 
 <script>
 function tblrelationsChangeValue(fid1,fid2,obj){
-// 	var td = $("#" + tbl + field + id);
-// 	td.attr("val", $(obj).val());
-// 	td.text($(obj).val());
 	dwra.sqlExec("update FactorRelation set `label`='"
 			+ $(obj).val() + "' where fid1=" + fid1 +" and fid2="+fid2, {
 		callback : function() {
@@ -54,6 +51,16 @@ function tblrelationsChangeValue(fid1,fid2,obj){
 		}
 	});
 }
+
+function tblrelationsInsertValue(fid1,fid2,obj){
+	dwra.sqlExec("insert into FactorRelation(label,fid1,fin2)values('"
+			+ $(obj).val() + "' ," + fid1 +","+fid2+")", {
+		callback : function() {
+			window.location.reload(true);
+		}
+	});
+}
+
 $("#tblrelations table tbody td").dblclick(
 		function(e) {
 			var td = $(e.target);
