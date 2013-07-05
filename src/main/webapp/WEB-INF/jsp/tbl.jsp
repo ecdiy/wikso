@@ -1,4 +1,4 @@
-<div class="table">
+<div class="table" id="tbl-${param.tbl}">
 	<c:if test="${not empty lists }">
 	<table>
 		<thead>
@@ -16,25 +16,17 @@
 				<tr id="${param.tbl}_${f.get('id')}">
 					<c:forEach var="b" items="${cols }">
 						<c:if test="${b.name != 'id' && b.name != 'schemeId'}">
-							<td class="left">${f.get(b.name)}</td>
+							<td class="left" id="${param.tbl}${b.name}${f.id}" name="${b.name}"  data_id="${f.id}" val="${f.get(b.name)}">${f.get(b.name)}</td>
 						</c:if>
 					</c:forEach>
-					<td><a href="#" onclick="del('${param.tbl}',${f.get('id')})">删除</a></td>
+					<td><a href="#" onclick="delTableDate('${param.tbl}',${f.get('id')})">删除</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
 	</c:if>
 	
-	<script type="text/javascript">
-	function del(tbl,id){
-		dwra.sqlExec("delete from "+tbl+" where id="+id,{
-		  	callback: function(){
-		  	window.location.reload(true);
-		  	}
-		  }) ;
-	}	
-	</script>
+
 	<br> <br>
 	<div>
 		<form action="addTblData.jspa" method="post">

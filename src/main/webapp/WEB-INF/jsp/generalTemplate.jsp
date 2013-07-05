@@ -15,8 +15,10 @@
 
 <!--[if IE]><script language="javascript" type="text/javascript" src="s/smooth/resources/scripts/excanvas.min.js"></script><![endif]-->
 
+ 
+	
 <script src="s/smooth/resources/scripts/jquery-1.4.2.min.js"
-	type="text/javascript"></script>
+ 	type="text/javascript"></script>  
 
 <script src="s/smooth/resources/scripts/jquery-ui-1.8.custom.min.js"
 	type="text/javascript"></script>
