@@ -1,7 +1,7 @@
- 
+<!--test ${testva}  --> 
 <div id="box-tabs" class="box">
 	<div class="title">
-		<h5>${scheme.name}</h5>
+		<h5>${scheme.name} ${testva}</h5>
 		<ul class="links">
 			<li><a href="#box-DIY">关系图</a></li>
 			<li><a href="#box-Factor">因子属性</a></li>

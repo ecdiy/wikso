@@ -137,10 +137,8 @@ public class SchemeController {
 
 		model.addAttribute("list", list);
 		model.addAttribute("frlist", frnew);
-		//model.addAttribute("testva", "xvv");
+		model.addAttribute("testva", "2");
 		return "scheme";
 	}
-	
-	
 
 }
