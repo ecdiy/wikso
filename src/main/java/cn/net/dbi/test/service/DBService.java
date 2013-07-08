@@ -68,13 +68,20 @@ public class DBService {
 				continue;
 			for (int j = 0; j < list.size(); j++) {
 				FactorRelation fr = new FactorRelation();
+				Factor f2 = list.get(j);
 				fr.setFid1(f1.getId());
-				fr.setFid2(list.get(j).getId());
+				fr.setFid2(f2.getId());
 				if (fr.getFid1() == fr.getFid2())
 					continue;
 				fr.setSchemeId(schemeId);
 				fr.setLabel(tds[j + 1]);
 				factorRelationRepository.save(fr);
+				f1.setFromRelation(f1.getFromRelation() + 1);
+				f2.setToRelation(f2.getToRelation() + 1);
+				f1.setCountRelation(f1.getFromRelation() + f1.getToRelation());
+				f2.setCountRelation(f2.getFromRelation() + f2.getToRelation());
+				factorRepository.save(f1);
+				factorRepository.save(f2);
 			}
 		}
 

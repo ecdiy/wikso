@@ -85,7 +85,7 @@ canvas {
 		}
 	</c:forEach>
 </script>
- 
+
 
 <div id="schemeDIYDIV" class="box" style="background: #DFDFDF;">
 	<script type="text/javascript" src="s/fsm.js"></script>
@@ -128,6 +128,10 @@ canvas {
 
 	<ul id="funMenu">
 		<li><a href="?id=${param.id}&role=0">所有</a></li>
+
+		<li><a href="?id=${param.id}&role=3">自动分布方案--圆、正N边形</a></li>
+		<li><a href="?id=${param.id}&role=4">树形分布方案</a></li>
+
 		<li><a href="?id=${param.id}&role=1">过滤孤立点</a></li>
 
 		<c:forEach var="label"
@@ -145,7 +149,7 @@ canvas {
 			href="javascript:saveAsLaTeX()">LaTeX</a>
 		</li>
 		<li><b>双击添加因子</b></li>
-		<li><b>shift+拖曳  添加因子关系</b></li>
+		<li><b>shift+拖曳 添加因子关系</b></li>
 		<li><b>Move something:</b> drag it around</li>
 		<li><b>Delete something:</b> click it and press the delete key
 			(not the backspace key)</li>

@@ -6,15 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.annotation.DirtiesContext.ClassMode;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springframework.util.Assert;
 
 import cn.net.dbi.test.repository.FactorRelationRepository;
@@ -22,12 +14,7 @@ import cn.net.dbi.test.repository.TFactorRepository;
 import cn.net.dbi.test.service.DBOpen;
 import cn.net.dbi.test.service.DBService;
 
-@DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
-@RunWith(SpringJUnit4ClassRunner.class)
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
-		DirtiesContextTestExecutionListener.class, TestInit.class })
-@ContextConfiguration(locations = { "classpath*:dbi-test/*.xml" })
-public class DBTest {
+public class DBTest extends TestBase {
 	@Autowired
 	TFactorRepository tEntityRepository;
 	@Autowired

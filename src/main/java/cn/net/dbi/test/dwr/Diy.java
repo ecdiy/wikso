@@ -50,10 +50,19 @@ public class Diy {
 				JSONObject json = links.getJSONObject(i);
 				FactorRelation fr = new FactorRelation();
 				fr.setSchemeId(schemeId);
-				fr.setFid1(factorList.get(json.getInt("nodeA")).getId());
-				fr.setFid2(factorList.get(json.getInt("nodeB")).getId());
+				Factor f1 = factorList.get(json.getInt("nodeA"));
+				fr.setFid1(f1.getId());
+				Factor f2 = factorList.get(json.getInt("nodeB"));
+				fr.setFid2(f2.getId());
 				fr.setLabel(json.getString("text"));
 				factorRelationRepository.save(fr);
+
+				f1.setFromRelation(f1.getFromRelation() + 1);
+				f2.setToRelation(f2.getToRelation() + 1);
+				f1.setCountRelation(f1.getFromRelation() + f1.getToRelation());
+				f2.setCountRelation(f2.getFromRelation() + f2.getToRelation());
+				factorRepository.save(f1);
+				factorRepository.save(f2);
 			}
 		}
 	}

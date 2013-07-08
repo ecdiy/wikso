@@ -24,6 +24,7 @@ import cn.net.dbi.test.repository.SchemeRepository;
 import cn.net.dbi.test.repository.TFactorRepository;
 import cn.net.dbi.test.service.Convert;
 import cn.net.dbi.test.service.DBOpen;
+import cn.net.dbi.test.service.TreeConvert;
 
 @Controller
 public class SchemeController {
@@ -41,6 +42,9 @@ public class SchemeController {
 	SchemeRepository schemeRepository;
 	@Autowired
 	DBOpen db;
+
+	@Autowired
+	TreeConvert treeConvert;
 
 	@RequestMapping("addTblData.jspa")
 	public String addTblData(@RequestParam("schemeId") long schemeId,
@@ -62,7 +66,7 @@ public class SchemeController {
 		}
 		String sql = sb1.toString().substring(0, sb1.length() - 1) + ")values("
 				+ sb2.toString().substring(0, sb2.length() - 1) + ")";
-		System.out.println(sql);
+		logger.info(sql);
 		db.exec(sql, list);
 
 		return "redirect:scheme.jspa?id=" + schemeId;
@@ -78,7 +82,7 @@ public class SchemeController {
 					db.getList(HashMap.class, "select * from " + tbl
 							+ " where schemeId=?", schemeId));
 		} catch (Exception e) {
-			logger.error("error table=：" + tbl + "\n" + e.getMessage(), e);
+			// logger.error("error table=：" + tbl + e.getMessage(), e);
 			e.printStackTrace();
 		}
 		return "tbl";
@@ -117,6 +121,13 @@ public class SchemeController {
 		} else if (role.equals("2")) {
 			list = convert.convertList(factorRepository.findByRelation(
 					schemeId, oid, oid));
+		} else if (role.equals("3")) {// 正N边形
+			list = convert.circle(factorRepository.findBySchemeId(schemeId),
+					false);
+		} else if (role.equals("4")) {// 树
+		// list = convert.convertList(factorRepository.findByRelation(
+		// schemeId, oid, oid));
+			list = treeConvert.getTreeFacotr(schemeId).list;
 		} else {
 			list = convert.convertList(factorRepository
 					.findBySchemeId(schemeId));
@@ -137,7 +148,7 @@ public class SchemeController {
 
 		model.addAttribute("list", list);
 		model.addAttribute("frlist", frnew);
-		model.addAttribute("testva", "2");
+		// model.addAttribute("testva", "2");
 		return "scheme";
 	}
 

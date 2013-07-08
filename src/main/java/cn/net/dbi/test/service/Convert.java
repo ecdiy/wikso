@@ -18,6 +18,21 @@ public class Convert {
 	@Autowired
 	FactorAttrRepository factorAttrRepository;
 
+
+
+	public List<Factor> circle(List<Factor> list, boolean update) {
+		for (int i = 0; i < list.size(); i++) {
+			Factor f = list.get(i);
+			f.setX(50 + (int) (250 * (1 + Math.sin(Math.PI * i * 2
+					/ list.size()))));
+			f.setY(50 + (int) (250 * (1 - Math.cos(Math.PI * i * 2
+					/ list.size()))));
+			if (update)
+				factorRepository.save(f);
+		}
+		return list;
+	}
+
 	public List<Factor> convertList(List<Factor> list) {
 		int needCovert = 0;
 		for (Factor f : list) {
@@ -25,14 +40,7 @@ public class Convert {
 				needCovert++;
 		}
 		if (needCovert >= 1) {
-			for (int i = 0; i < list.size(); i++) {
-				Factor f = list.get(i);
-				f.setX(50 + (int) (250 * (1 + Math.sin(Math.PI * i * 2
-						/ list.size()))));
-				f.setY(50 + (int) (250 * (1 - Math.cos(Math.PI * i * 2
-						/ list.size()))));
-				factorRepository.save(f);
-			}
+			circle(list, true);
 		}
 		return list;
 	}
