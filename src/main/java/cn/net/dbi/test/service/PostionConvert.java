@@ -31,6 +31,7 @@ public class PostionConvert {
 
 	public abstract class T {
 
+		HashSet<String> existPoints = new HashSet<>();
 		public List<Factor> list;
 		List<FactorRelation> relations;
 		HashMap<Long, Factor> allFactor = new HashMap<>();
@@ -145,10 +146,11 @@ public class PostionConvert {
 		}
 
 		@Override
-		void tran(List<Factor> list) {
-			int[][] matrix = new int[list.size()][list.size()];
+		void tran(List<Factor> inlist) {
+			int[][] matrix = new int[inlist.size()][inlist.size()];
 			for (FactorRelation fr : relations) {
-				int p1 = pos(fr.getFid1(), list), p2 = pos(fr.getFid2(), list);
+				int p1 = pos(fr.getFid1(), inlist), p2 = pos(fr.getFid2(),
+						inlist);
 				if (p1 > -1 && p2 > -1) {
 					matrix[p1][p2] = 1;
 					matrix[p2][p1] = 1;
@@ -159,25 +161,57 @@ public class PostionConvert {
 			int node = 0;
 			for (int i : ml.pmax.max) {
 				node++;
-				Factor f = list.get(i);
+				Factor f = inlist.get(i);
 				startY += r;
 				f.setX(w / 2 + r * (node % 2));
 				f.setY(startY);
 			}
 
-			for (Factor f : list) {
+			for (Factor f : inlist) {
 				if (f.getX() == 0) {
-					int pos = pos(f.getId(), list);
-					HashSet<Integer> set = ml.factors[pos].son;
-					if (set != null) {
-						int fst = (int) set.toArray()[0];
-						f.setX(list.get(fst).getX() + r);
-						f.setY(list.get(fst).getY());
-					}
+					leftInitPos++;
 				}
 			}
 
+			if (leftInitPos > 0) {
+				HashSet<Integer> setx = new HashSet<Integer>();
+				setpos(ml, ml.pmax.max.getFirst(), setx, inlist);
+				System.out.println("leftInitPos=" + leftInitPos + ";"
+						+ setx.size() + "/" + inlist.size() + ";"
+						+ setx.toString());
+			}
+
 		}
+
+		void setpos(MatrixLongest ml, Integer node, HashSet<Integer> iset,
+				List<Factor> inlist) {
+			if (leftInitPos > 0 && !iset.contains(node)) {
+				iset.add(node);
+				Factor ff = inlist.get(node);
+				HashSet<Integer> set = ml.factors[node].son;
+				for (Integer son : set) {
+					Factor f = inlist.get(son);
+					if (f.getX() == 0) {
+						f.setY(ff.getY());
+						f.setX((ff.getX() > w / 2 ? 1 : -1) * r + ff.getX());
+
+						String ps = f.getX() + "," + f.getY();
+						while (existPoints.contains(ps)) {
+							f.setY(f.getY() + r);
+							ps = f.getX() + "," + f.getY();
+						}
+						existPoints.add(ps);
+						leftInitPos--;
+						System.out.println(ff.getName() + "==>" + f.getName()
+								+ ";" + f.getX() + ";" + f.getY());
+					}
+					setpos(ml, son, iset, inlist);
+				}
+			}
+		}
+
+		int left = -1, leftInitPos = 0;
+
 	}
 
 	public class Circle extends T {

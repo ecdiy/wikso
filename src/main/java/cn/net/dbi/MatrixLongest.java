@@ -28,11 +28,11 @@ public class MatrixLongest {
 			this.from = from;
 			this.to = to;
 			// 遍历所有路径并存储
-			System.out.print(from + "==>" + to + ";");
+			//System.out.print(from + "==>" + to + ";");
 			LinkedList<Integer> list = new LinkedList<Integer>();
 			list.addFirst(from);
 			find(factors[from], list);
-			System.out.print(max.size() + ";" + max.toString() + "\n");
+			//System.out.print(max.size() + ";" + max.toString() + "\n");
 		}
 
 		void find(T from, LinkedList<Integer> eles) {
@@ -74,7 +74,7 @@ public class MatrixLongest {
 					t.son.add(j);
 			}
 			factors[i] = t;
-			System.out.println(i + ";sons=" + t.son.toString());
+		//	System.out.println(i + ";sons=" + t.son.toString());
 		}
 
 		for (int i = 0; i < matrix.length; i++) {
