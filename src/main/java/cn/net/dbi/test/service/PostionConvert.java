@@ -1,6 +1,7 @@
 package cn.net.dbi.test.service;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -147,18 +148,33 @@ public class PostionConvert {
 		void tran(List<Factor> list) {
 			int[][] matrix = new int[list.size()][list.size()];
 			for (FactorRelation fr : relations) {
-				if (pos(fr.getFid1(), list) > -1
-						&& pos(fr.getFid2(), list) > -1) {
-					matrix[pos(fr.getFid1(), list)][pos(fr.getFid2(), list)] = 1;
-					matrix[pos(fr.getFid2(), list)][pos(fr.getFid1(), list)] = 1;
+				int p1 = pos(fr.getFid1(), list), p2 = pos(fr.getFid2(), list);
+				if (p1 > -1 && p2 > -1) {
+					matrix[p1][p2] = 1;
+					matrix[p2][p1] = 1;
 				}
 			}
 			MatrixLongest ml = new MatrixLongest(matrix);
+
+			int node = 0;
 			for (int i : ml.pmax.max) {
+				node++;
 				Factor f = list.get(i);
 				startY += r;
-				f.setX(w / 2);
+				f.setX(w / 2 + r * (node % 2));
 				f.setY(startY);
+			}
+
+			for (Factor f : list) {
+				if (f.getX() == 0) {
+					int pos = pos(f.getId(), list);
+					HashSet<Integer> set = ml.factors[pos].son;
+					if (set != null) {
+						int fst = (int) set.toArray()[0];
+						f.setX(list.get(fst).getX() + r);
+						f.setY(list.get(fst).getY());
+					}
+				}
 			}
 
 		}

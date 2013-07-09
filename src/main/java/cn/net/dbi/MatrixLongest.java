@@ -3,17 +3,23 @@ package cn.net.dbi;
 import java.util.HashSet;
 import java.util.LinkedList;
 
+/**
+ * 找出最大路径算法，用树来遍历。
+ * 
+ * @author Administrator
+ * 
+ */
 public class MatrixLongest {
 	public class T {
 		public Integer factoryId;
 		public HashSet<Integer> son = new HashSet<>();
 	}
 
-	T[] factors;
+	public T[] factors;
 	int[][] matrix;
 	public P pmax;
 
-	public class P {
+	public class P {// 计算任意两者的最大距离,遍历树.
 		Integer from, to;
 
 		public LinkedList<Integer> max = new LinkedList<>();
