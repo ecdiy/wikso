@@ -130,7 +130,8 @@ canvas {
 		<li><a href="?id=${param.id}&role=0">所有</a></li>
 
 		<li><a href="?id=${param.id}&role=3">自动分布方案--圆、正N边形</a></li>
-		<li><a href="?id=${param.id}&role=4">树形分布方案</a></li>
+		<li><a href="?id=${param.id}&role=4">1、找出孤立点.2、分组.3、再画圆</a></li>
+		<li><a href="?id=${param.id}&role=5">1、找出孤立点.2、分组.3、转化成矩阵,找出最长路径</a></li>
 
 		<li><a href="?id=${param.id}&role=1">过滤孤立点</a></li>
 
@@ -165,7 +166,7 @@ canvas {
 
 
 
-	<canvas id="canvas" width="800" height="600">
+	<canvas id="canvas" width="800" height="${drawHeight }">
 		<span class="error">Your browser does not support<br>the HTML5 &lt;canvas&gt; element</span>
 	</canvas>
 	<textarea id="output"></textarea>

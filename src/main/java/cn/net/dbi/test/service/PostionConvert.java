@@ -7,78 +7,56 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import cn.net.dbi.MaxValue;
+import cn.net.dbi.MatrixLongest;
 import cn.net.dbi.test.model.Factor;
 import cn.net.dbi.test.model.FactorRelation;
 import cn.net.dbi.test.repository.FactorRelationRepository;
 import cn.net.dbi.test.repository.TFactorRepository;
 
 @Component
-public class TreeConvert {
+public class PostionConvert {
 	@Autowired
 	TFactorRepository factorRepository;
 	@Autowired
 	FactorRelationRepository factorRelationRepository;
 
-	public T getMaxRote(long schemeId) {
-		return new MaxRote(schemeId);
+	public Circle getTreeFacotr(long schemeId) {
+		return new Circle(schemeId);
 	}
 
-	public Tree getTreeFacotr(long schemeId) {
-		return new Tree(schemeId);
+	public T getMatrix(long schemeId) {
+		return new Matrix(schemeId);
 	}
 
-	public class T {
-		int[][] matrix;
+	public abstract class T {
 
 		public List<Factor> list;
 		List<FactorRelation> relations;
-		List<Factor> news = new LinkedList<Factor>();
 		HashMap<Long, Factor> allFactor = new HashMap<>();
 
 		int r = 80;
 		int w = 800;
-		int h = 800;
+
 		public List<Factor> singleList = new LinkedList<Factor>();
 		public LinkedList<LinkedList<Factor>> group = new LinkedList<LinkedList<Factor>>();
-		int startX = 50, startY = 50;
+		int startX = 50;
+		public int startY = 50;
 		int space = 100;
 
 		T(long schemeId) {
 			list = factorRepository.findBySchemeId(schemeId);
 			relations = factorRelationRepository.findBySchemeId(schemeId);
 			single();
+			startY += r;
 			while (true) {
 				HashMap<Long, Factor> map = getGroup();
 				if (map.isEmpty())
 					break;
 				LinkedList<Factor> s = new LinkedList<>();
 				s.addAll(map.values());
+				tran(s);
 				group.add(s);
 			}
-			// ---
-			matrix = new int[list.size()][list.size()];
-			for (FactorRelation fr : relations) {
-				matrix[pos(fr.getFid1())][pos(fr.getFid2())] = 1;
-			}
-			for (int i = 0; i < list.size(); i++) {
-				for (int j = 0; j < list.size(); j++) {
-					System.out.print(matrix[i][j] + "\t");
-				}
-				System.out.println();
-			}
-			// --
-			MaxValue mv = new MaxValue(matrix);
-
-			System.out.println(mv.result.toString());
-		}
-
-		private int pos(long fid) {
-			for (int i = 0; i < list.size(); i++) {
-				if (fid == list.get(i).getId())
-					return i;
-			}
-			return -1;
 		}
 
 		private void single() {
@@ -148,7 +126,56 @@ public class TreeConvert {
 			return getGroupx(map);
 		}
 
-		public void circle(List<Factor> list, int r) {
+		abstract void tran(List<Factor> list);
+	}
+
+	public class Matrix extends T {
+
+		Matrix(long schemeId) {
+			super(schemeId);
+		}
+
+		int pos(long fid, List<Factor> list) {
+			for (int i = 0; i < list.size(); i++) {
+				if (fid == list.get(i).getId())
+					return i;
+			}
+			return -1;
+		}
+
+		@Override
+		void tran(List<Factor> list) {
+			int[][] matrix = new int[list.size()][list.size()];
+			for (FactorRelation fr : relations) {
+				if (pos(fr.getFid1(), list) > -1
+						&& pos(fr.getFid2(), list) > -1) {
+					matrix[pos(fr.getFid1(), list)][pos(fr.getFid2(), list)] = 1;
+					matrix[pos(fr.getFid2(), list)][pos(fr.getFid1(), list)] = 1;
+				}
+			}
+			MatrixLongest ml = new MatrixLongest(matrix);
+			for (int i : ml.pmax.max) {
+				Factor f = list.get(i);
+				startY += r;
+				f.setX(w / 2);
+				f.setY(startY);
+			}
+
+		}
+	}
+
+	public class Circle extends T {
+
+		Circle(long schemeId) {
+			super(schemeId);
+		}
+
+		public void tran(List<Factor> list) {
+			int R = r;
+			if (list.size() > 10) {
+				startX = 50;
+				R = 300;
+			}
 			if (startX + 2 * r > w) {
 				startX = 50;
 				startY += 2 * r;
@@ -156,56 +183,14 @@ public class TreeConvert {
 			for (int i = 0; i < list.size(); i++) {
 				Factor f = list.get(i);
 				f.setX(startX
-						+ (int) (r * (1 + Math.sin(Math.PI * i * 2
+						+ (int) (R * (1 + Math.sin(Math.PI * i * 2
 								/ list.size()))));
 				f.setY(startY
-						+ (int) (r * (1 - Math.cos(Math.PI * i * 2
+						+ (int) (R * (1 - Math.cos(Math.PI * i * 2
 								/ list.size()))));
 			}
+			startY += 2 * R + r;
 		}
-	}
-
-	public class MaxRote extends T {
-
-		MaxRote(long schemeId) {
-			super(schemeId);
-		}
-
-	}
-
-	public class Tree extends T {
-
-		Tree(long schemeId) {
-			super(schemeId);
-		}
-
-		public void convert(Factor f) {
-
-			// Factor maxRelationNode = factorRepository
-			// .findByMaxCountRelation(schemeId);
-			// maxRelationNode.setX(w / 2);
-			// maxRelationNode.setY(h / 2);
-			// convert(maxRelationNode);
-
-			// singleMap.remove(f.getId());
-			// // ==TODO
-			// int node = 0;
-			// for (FactorRelation fr : relations) {
-			// if (singleMap.containsKey(fr.getFid1())
-			// && fr.getFid2() == f.getId()) {
-			// f.setX(50 + (int) (250 * (1 + Math.sin(Math.PI * 2 * node
-			// / list.size()))));
-			// f.setY(50 + (int) (250 * (1 - Math.cos(Math.PI * 2 * node
-			// / list.size()))));
-			// }
-			// if ((singleMap.containsKey(fr.getFid2()) && fr.getFid1() == f
-			// .getId())) {}
-			// }
-
-			// --
-			news.add(f);
-		}
-
 	}
 
 }

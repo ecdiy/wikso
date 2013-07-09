@@ -24,7 +24,7 @@ import cn.net.dbi.test.repository.SchemeRepository;
 import cn.net.dbi.test.repository.TFactorRepository;
 import cn.net.dbi.test.service.Convert;
 import cn.net.dbi.test.service.DBOpen;
-import cn.net.dbi.test.service.TreeConvert;
+import cn.net.dbi.test.service.PostionConvert;
 
 @Controller
 public class SchemeController {
@@ -44,7 +44,7 @@ public class SchemeController {
 	DBOpen db;
 
 	@Autowired
-	TreeConvert treeConvert;
+	PostionConvert treeConvert;
 
 	@RequestMapping("addTblData.jspa")
 	public String addTblData(@RequestParam("schemeId") long schemeId,
@@ -100,6 +100,7 @@ public class SchemeController {
 			@RequestParam(value = "role", defaultValue = "0") String role,
 			@RequestParam(value = "oid", defaultValue = "0") String oid,
 			Model model) throws Exception {
+		int h = 600;
 		if (oid != null)
 			oid = new String(oid.getBytes("ISO8859-1"), "utf-8");
 		Scheme scheme = schemeRepository.findOne(schemeId);
@@ -124,10 +125,14 @@ public class SchemeController {
 		} else if (role.equals("3")) {// 正N边形
 			list = convert.circle(factorRepository.findBySchemeId(schemeId),
 					false);
-		} else if (role.equals("4")) {// 树
-		// list = convert.convertList(factorRepository.findByRelation(
-		// schemeId, oid, oid));
-			list = treeConvert.getTreeFacotr(schemeId).list;
+		} else if (role.equals("4")) {// 圆
+			PostionConvert.Circle tree = treeConvert.getTreeFacotr(schemeId);
+			list = tree.list;
+			h = tree.startY + 50;
+		} else if (role.equals("5")) {// 树
+			PostionConvert.T tree = treeConvert.getMatrix(schemeId);
+			list = tree.list;
+			h = tree.startY + 50;
 		} else {
 			list = convert.convertList(factorRepository
 					.findBySchemeId(schemeId));
@@ -146,6 +151,7 @@ public class SchemeController {
 			}
 		}
 
+		model.addAttribute("drawHeight", h);
 		model.addAttribute("list", list);
 		model.addAttribute("frlist", frnew);
 		// model.addAttribute("testva", "2");
